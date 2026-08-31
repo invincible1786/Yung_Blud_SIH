@@ -1,0 +1,9 @@
+osmnx>=1.9
+networkx>=3.2
+numpy
+pandas
+scipy
+deap
+matplotlib
+seaborn
+tqdm
