@@ -1,0 +1,29 @@
+{
+  "instance_n20": {
+    "lower_bound_vehicles": 4,
+    "declared_fleet": 5,
+    "declared_feasible": true,
+    "declared_distance": 58381.8544921875,
+    "relaxed_fleet": 5,
+    "relaxed_feasible": true,
+    "relaxed_distance": 58381.8544921875
+  },
+  "instance_n50": {
+    "lower_bound_vehicles": 10,
+    "declared_fleet": 8,
+    "declared_feasible": false,
+    "declared_distance": null,
+    "relaxed_fleet": 10,
+    "relaxed_feasible": false,
+    "relaxed_distance": null
+  },
+  "instance_n100": {
+    "lower_bound_vehicles": 17,
+    "declared_fleet": 15,
+    "declared_feasible": false,
+    "declared_distance": null,
+    "relaxed_fleet": 17,
+    "relaxed_feasible": true,
+    "relaxed_distance": 222766.03662109375
+  }
+}
