@@ -225,36 +225,72 @@ def build_interactive_route_map(
     # 1. Depot Setup
     depot_nid = int(instance["depot"]["node_id"])
     depot_lat, depot_lon = get_node_lat_lon(depot_nid, graph, nodes_metadata)
+    depot_meta = instance.get("depot", {})
+    depot_name = depot_meta.get("name", "Central Postal Depot")
+    depot_cat = depot_meta.get("category", "building:warehouse").replace("_", " ").title()
+    depot_cap_kg = depot_meta.get("capacity_kg", 5000)
 
-    depot_group = folium.FeatureGroup(name="★ Central Depot", show=True)
+    depot_group = folium.FeatureGroup(name="★ Primary Hub Depot", show=True)
 
     depot_popup_html = f"""
-    <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; min-width: 200px; color: #1e293b;">
+    <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; min-width: 220px; color: #1e293b;">
         <div style="background: #e63946; color: white; padding: 6px 10px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">
-            CENTRAL POSTAL DEPOT
+            {depot_name.upper()}
         </div>
-        <b>Hub Location:</b> Kharagpur Division<br>
+        <b>Facility Class:</b> {depot_cat}<br>
         <b>OSM Node ID:</b> <code>{depot_nid}</code><br>
-        <b>Latitude:</b> {depot_lat:.5f}<br>
-        <b>Longitude:</b> {depot_lon:.5f}<br>
-        <b>Fleet Capacity:</b> {instance.get('vehicle_capacity', 100)} units/vehicle
+        <b>Latitude / Longitude:</b> {depot_lat:.5f}, {depot_lon:.5f}<br>
+        <b>Storage Capacity:</b> <span style="color: #059669; font-weight: bold;">{depot_cap_kg:,.0f} kg</span><br>
+        <b>Fleet Standard Capacity:</b> {instance.get('vehicle_capacity', 100)} kg/vehicle
     </div>
     """
 
     folium.Marker(
         location=[depot_lat, depot_lon],
         icon=folium.Icon(icon="home", color="red", icon_color="white"),
-        popup=folium.Popup(depot_popup_html, max_width=300),
-        tooltip="Central Depot (Start / Return)"
+        popup=folium.Popup(depot_popup_html, max_width=320),
+        tooltip=f"Primary Depot: {depot_name} (Capacity: {depot_cap_kg} kg)"
     ).add_to(depot_group)
     depot_group.add_to(m)
+
+    # 1b. Additional Candidate Depots Layer
+    depot_json_path = os.path.join("data", "processed", "depot_nodes.json")
+    if os.path.exists(depot_json_path):
+        try:
+            with open(depot_json_path, "r") as f:
+                d_nodes_data = json.load(f)
+            cand_group = folium.FeatureGroup(name="Alternative Hub Candidates", show=False)
+            for d in d_nodes_data.get("depots", []):
+                if int(d.get("graph_node", -1)) == depot_nid:
+                    continue
+                d_lat, d_lon = d["lat"], d["lon"]
+                d_name = d["name"]
+                d_cap = d.get("capacity_kg", 3000)
+                d_cat = d.get("category", "hub").replace("_", " ").title()
+                c_popup = f"""
+                <div style="font-family: 'Segoe UI', Arial; font-size: 12px; min-width: 180px;">
+                    <b style="color: #d97706;">{d_name}</b><br>
+                    <b>Category:</b> {d_cat}<br>
+                    <b>Capacity:</b> {d_cap} kg<br>
+                    <b>Source:</b> {d.get('source', 'osm')}
+                </div>
+                """
+                folium.Marker(
+                    location=[d_lat, d_lon],
+                    icon=folium.Icon(icon="briefcase", color="orange", icon_color="white"),
+                    popup=folium.Popup(c_popup, max_width=250),
+                    tooltip=f"Candidate: {d_name} ({d_cap} kg)"
+                ).add_to(cand_group)
+            cand_group.add_to(m)
+        except Exception:
+            pass
 
     # 2. Vehicle Routes Setup
     routes = solution.routes if hasattr(solution, "routes") else solution.get("routes", [])
     total_cost = solution.total_cost if hasattr(solution, "total_cost") else solution.get("cost", 0.0)
 
     customers = instance.get("customers", [])
-    cust_demands = {int(c["node_id"]): c.get("demand", 0) for c in customers}
+    cust_meta_map = {int(c["node_id"]): c for c in customers}
 
     for v_idx, route in enumerate(routes):
         v_num = v_idx + 1
@@ -265,8 +301,16 @@ def build_interactive_route_map(
         if not customer_stops:
             continue
 
+        route_load = sum(cust_meta_map.get(int(nid), {}).get("demand", 0) for nid in customer_stops)
+        if route_load <= 15:
+            veh_label = "Two-Wheeler Courier"
+        elif route_load <= 200:
+            veh_label = "Three-Wheeler Tempo"
+        else:
+            veh_label = "Light Commercial Vehicle (LCV)"
+
         v_group = folium.FeatureGroup(
-            name=f"Vehicle {v_num} ({len(customer_stops)} stops)",
+            name=f"Vehicle {v_num} [{veh_label}] ({len(customer_stops)} stops, {route_load} kg)",
             show=True
         )
 
@@ -279,35 +323,93 @@ def build_interactive_route_map(
                 color=color,
                 weight=4.5,
                 opacity=0.88,
-                tooltip=f"Vehicle {v_num} Route ({len(customer_stops)} stops)"
+                tooltip=f"Vehicle {v_num} [{veh_label}] | Payload: {route_load} kg"
             ).add_to(v_group)
 
         # Customer stop markers
         for seq, stop_nid in enumerate(customer_stops, start=1):
             stop_nid_int = int(stop_nid)
             s_lat, s_lon = get_node_lat_lon(stop_nid_int, graph, nodes_metadata)
-            d_val = cust_demands.get(stop_nid_int, 0)
+            c_info = cust_meta_map.get(stop_nid_int, {})
+            d_val = c_info.get("demand", 0)
+            d_units = c_info.get("demand_units", 1)
+            c_name = c_info.get("name", f"Customer {stop_nid_int}")
+            c_cat = c_info.get("category", "amenity:commercial").replace("_", " ").title()
+            tw = c_info.get("time_window", [480, 600])
+            start_h, start_m = divmod(tw[0], 60)
+            end_h, end_m = divmod(tw[1], 60)
+            tw_str = f"{start_h:02d}:{start_m:02d} – {end_h:02d}:{end_m:02d}"
+            serv_time = c_info.get("service_time_min", 5)
+
+            # Icon choice based on category
+            icon_name = "tag"
+            if "shop" in c_cat.lower() or "market" in c_cat.lower():
+                icon_name = "shopping-cart"
+            elif "hospital" in c_cat.lower() or "clinic" in c_cat.lower() or "pharmacy" in c_cat.lower():
+                icon_name = "medkit"
+            elif "food" in c_cat.lower() or "restaurant" in c_cat.lower() or "cafe" in c_cat.lower():
+                icon_name = "cutlery"
+            elif "office" in c_cat.lower() or "bank" in c_cat.lower():
+                icon_name = "briefcase"
 
             popup_html = f"""
-            <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; min-width: 210px; color: #1e293b;">
+            <div style="font-family: 'Segoe UI', Arial, sans-serif; font-size: 13px; min-width: 230px; color: #1e293b;">
                 <div style="background: {color}; color: white; padding: 5px 8px; border-radius: 4px; font-weight: bold; margin-bottom: 8px;">
-                    Vehicle {v_num} — Stop #{seq}
+                    Vehicle {v_num} — Stop #{seq} of {len(customer_stops)}
                 </div>
-                <b>Customer Node:</b> <code>{stop_nid_int}</code><br>
-                <b>Delivery Demand:</b> <span style="font-weight: bold; color: #0284c7;">{d_val} units</span><br>
-                <b>Sequence:</b> {seq} of {len(customer_stops)}<br>
-                <b>Coordinates:</b> {s_lat:.5f}, {s_lon:.5f}
+                <b>Destination:</b> <span style="color: #0f172a; font-weight: 600;">{c_name}</span><br>
+                <b>Category:</b> {c_cat}<br>
+                <b>Payload Demand:</b> <span style="font-weight: bold; color: #0284c7;">{d_val} kg</span> ({d_units} units)<br>
+                <b>Delivery Window:</b> <span style="color: #b45309; font-weight: bold;">{tw_str}</span><br>
+                <b>Service Duration:</b> {serv_time} mins<br>
+                <b>OSM Node ID:</b> <code>{stop_nid_int}</code>
             </div>
             """
 
             folium.Marker(
                 location=[s_lat, s_lon],
-                icon=folium.Icon(color=icon_color, icon="info-sign"),
-                popup=folium.Popup(popup_html, max_width=250),
-                tooltip=f"Vehicle {v_num} | Stop #{seq} (Demand: {d_val})"
+                icon=folium.Icon(color=icon_color, icon=icon_name, prefix="fa" if icon_name in ["medkit", "cutlery", "shopping-cart"] else "glyphicon"),
+                popup=folium.Popup(popup_html, max_width=280),
+                tooltip=f"Vehicle {v_num} | Stop #{seq}: {c_name} ({d_val} kg | {tw_str})"
             ).add_to(v_group)
 
         v_group.add_to(m)
+
+    # 2b. Traffic Congestion Overlay Layer (Optional)
+    weights_path = os.path.join("data", "processed", "time_aware_weights.json")
+    if os.path.exists(weights_path):
+        try:
+            with open(weights_path, "r") as f:
+                tw_data = json.load(f)
+            tw_weights = tw_data.get("weights", {})
+            cong_group = folium.FeatureGroup(name="Peak Traffic Congestion Corridors", show=False)
+
+            # Highlight top congested edges
+            c_count = 0
+            for u, v, k, data in graph.edges(keys=True, data=True):
+                edge_k = f"{u}_{v}_{k}"
+                e_dict = tw_weights.get(edge_k, {}).get("evening_peak", {})
+                if not e_dict:
+                    continue
+                mult = float(np.mean(list(e_dict.values())))
+                if mult >= 1.6:
+                    if "geometry" in data:
+                        seg_coords = [(lat, lon) for lon, lat in data["geometry"].coords]
+                    else:
+                        seg_coords = [(graph.nodes[u]["y"], graph.nodes[u]["x"]), (graph.nodes[v]["y"], graph.nodes[v]["x"])]
+                    folium.PolyLine(
+                        locations=seg_coords,
+                        color="#ef4444" if mult >= 2.0 else "#f97316",
+                        weight=4,
+                        opacity=0.8,
+                        tooltip=f"Evening Peak Congestion: {mult:.2f}x delay"
+                    ).add_to(cong_group)
+                    c_count += 1
+                    if c_count > 300:
+                        break
+            cong_group.add_to(m)
+        except Exception:
+            pass
 
     # 3. Layer Control for toggling vehicle routes
     folium.LayerControl(collapsed=False, position="topright").add_to(m)

@@ -1,0 +1,72 @@
+{
+  "fleet": [
+    {
+      "type": "two_wheeler",
+      "description": "Motorcycle / Scooter Courier",
+      "capacity_kg": 15,
+      "capacity_units": 5,
+      "cost_per_km_inr": 7.03,
+      "fixed_cost_inr": 150.0,
+      "max_range_km": 40,
+      "speed_factor": 0.88
+    },
+    {
+      "type": "three_wheeler",
+      "description": "Auto-Rickshaw / Commercial Tempo",
+      "capacity_kg": 200,
+      "capacity_units": 30,
+      "cost_per_km_inr": 8.0,
+      "fixed_cost_inr": 300.0,
+      "max_range_km": 60,
+      "speed_factor": 0.82
+    },
+    {
+      "type": "lcv",
+      "description": "Light Commercial Vehicle (Tata Ace / Dost)",
+      "capacity_kg": 750,
+      "capacity_units": 80,
+      "cost_per_km_inr": 7.05,
+      "fixed_cost_inr": 600.0,
+      "max_range_km": 120,
+      "speed_factor": 0.68
+    }
+  ],
+  "cost_weights": {
+    "distance_weight": 1.0,
+    "time_weight": 1.5,
+    "congestion_weight": 0.8,
+    "vehicle_cost_weight": 1.0
+  },
+  "cost_per_km_by_vehicle": {
+    "two_wheeler": 7.03,
+    "three_wheeler": 8.0,
+    "lcv": 7.05
+  },
+  "fixed_cost_by_vehicle": {
+    "two_wheeler": 150.0,
+    "three_wheeler": 300.0,
+    "lcv": 600.0
+  },
+  "capacity_kg_by_vehicle": {
+    "two_wheeler": 15,
+    "three_wheeler": 200,
+    "lcv": 750
+  },
+  "capacity_units_by_vehicle": {
+    "two_wheeler": 5,
+    "three_wheeler": 30,
+    "lcv": 80
+  },
+  "speed_factor_by_vehicle": {
+    "two_wheeler": 0.88,
+    "three_wheeler": 0.82,
+    "lcv": 0.68
+  },
+  "vehicle_mode_share": {
+    "two_wheeler": 0.502,
+    "three_wheeler": 0.33,
+    "lcv": 0.498
+  },
+  "calibration_source": "kaggle_delivery_logistics_india",
+  "fleet_calibration_source": "empirical_urban_traffic_model"
+}

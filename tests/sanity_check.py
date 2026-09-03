@@ -112,6 +112,55 @@ def run_sanity_tests():
         os.remove(test_grid)
     print("Comparison grid visualizer passed successfully!")
 
+    # Test 7: Data & Traffic Pipeline Artifacts Integrity
+    print("\nTesting integrated data & traffic pipeline artifacts integrity...")
+    proc_dir = os.path.join("data", "processed")
+    for fname in ["demand_nodes.json", "depot_nodes.json", "time_aware_weights.json", "cost_params.json", "kaggle_calibration.json", "fleet_calibration.json"]:
+        fpath = os.path.join(proc_dir, fname)
+        assert os.path.exists(fpath), f"Missing pipeline artifact: {fpath}"
+        assert os.path.getsize(fpath) > 50, f"Artifact {fpath} is unexpectedly small or empty"
+
+    with open(os.path.join(proc_dir, "demand_nodes.json"), "r") as f:
+        d_json = json.load(f)
+        assert len(d_json.get("customers", [])) >= 20, "Insufficient customer nodes in demand_nodes.json"
+        c0 = d_json["customers"][0]
+        assert "time_window" in c0, "Missing time_window in customer node"
+        assert "demand_kg" in c0, "Missing demand_kg in customer node"
+        assert "service_time_min" in c0, "Missing service_time_min in customer node"
+
+    with open(os.path.join(proc_dir, "depot_nodes.json"), "r") as f:
+        dep_json = json.load(f)
+        assert len(dep_json.get("depots", [])) >= 2, "Insufficient depot candidates"
+        assert "capacity_kg" in dep_json["depots"][0], "Missing capacity_kg in depot candidate"
+
+    with open(os.path.join(proc_dir, "time_aware_weights.json"), "r") as f:
+        tw_json = json.load(f)
+        assert len(tw_json.get("weights", {})) > 0, "Empty weights in time_aware_weights.json"
+
+    print("Data & traffic pipeline artifacts verified successfully!")
+
+    # Test 8: Data Visualizer Test
+    print("\nTesting data visualizer dashboard generation...")
+    from src.visualization.data_visualizer import plot_data_calibration_dashboard
+    test_cal_img = os.path.join("results", "plots", "test_sanity_calibration.png")
+    plot_data_calibration_dashboard(output_path=test_cal_img)
+    assert os.path.exists(test_cal_img), "Data calibration dashboard image was not created"
+    assert os.path.getsize(test_cal_img) > 20000, "Calibration image is too small"
+    if os.path.exists(test_cal_img):
+        os.remove(test_cal_img)
+    print("Data visualizer passed successfully!")
+
+    # Test 9: Traffic Visualizer Test
+    print("\nTesting traffic visualizer diurnal profile generation...")
+    from src.visualization.traffic_visualizer import plot_diurnal_congestion_profile
+    test_prof_img = os.path.join("results", "plots", "test_sanity_profile.png")
+    plot_diurnal_congestion_profile(output_path=test_prof_img)
+    assert os.path.exists(test_prof_img), "Traffic diurnal profile image was not created"
+    assert os.path.getsize(test_prof_img) > 10000, "Traffic profile image is too small"
+    if os.path.exists(test_prof_img):
+        os.remove(test_prof_img)
+    print("Traffic visualizer passed successfully!")
+
     print("\n==========================================")
     print("ALL SANITY TESTS PASSED SUCCESSFULLY!")
     print("==========================================")

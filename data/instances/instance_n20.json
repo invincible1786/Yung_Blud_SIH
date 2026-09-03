@@ -1,134 +1,357 @@
 {
     "instance_id": "instance_n20",
     "depot": {
-        "node_id": 9461998180,
-        "lat": 24.25132,
-        "lon": 83.26594
+        "node_id": 9454571334,
+        "lat": 22.338063,
+        "lon": 87.27914,
+        "name": "Nimpura Post Office",
+        "category": "amenity:post_office",
+        "capacity_kg": 2000.0
     },
     "customers": [
         {
-            "node_id": 9323353713,
-            "demand": 2,
-            "lat": 22.3436946,
-            "lon": 87.2762663
+            "node_id": 9465695815,
+            "demand": 38,
+            "demand_kg": 38.0,
+            "demand_units": 4,
+            "lat": 22.3403333,
+            "lon": 87.3187705,
+            "time_window": [
+                521,
+                701
+            ],
+            "service_time_min": 4,
+            "category": "amenity:fast_food",
+            "name": "Nantu Chowmin Stall"
         },
         {
-            "node_id": 9446995626,
-            "demand": 48,
-            "lat": 22.3496864,
-            "lon": 87.3007201
-        },
-        {
-            "node_id": 9447042459,
-            "demand": 15,
-            "lat": 22.3500426,
-            "lon": 87.3140754
-        },
-        {
-            "node_id": 3743556440,
+            "node_id": 1471100885,
             "demand": 8,
-            "lat": 22.3335553,
-            "lon": 87.3141513
+            "demand_kg": 8.0,
+            "demand_units": 1,
+            "lat": 22.317453,
+            "lon": 87.3099294,
+            "time_window": [
+                816,
+                846
+            ],
+            "service_time_min": 6,
+            "category": "amenity:cafe",
+            "name": "Rao Canteen"
         },
         {
-            "node_id": 9465240828,
-            "demand": 39,
-            "lat": 22.3480534,
-            "lon": 87.3289288
+            "node_id": 9446961347,
+            "demand": 33,
+            "demand_kg": 33.0,
+            "demand_units": 3,
+            "lat": 22.3446014,
+            "lon": 87.293785,
+            "time_window": [
+                832,
+                952
+            ],
+            "service_time_min": 3,
+            "category": "amenity:bank",
+            "name": "Axis Bank"
         },
         {
-            "node_id": 9447167156,
-            "demand": 3,
-            "lat": 22.3486051,
-            "lon": 87.306572
-        },
-        {
-            "node_id": 9465035206,
-            "demand": 47,
-            "lat": 22.3480399,
-            "lon": 87.3238466
-        },
-        {
-            "node_id": 9447109726,
+            "node_id": 11140840195,
             "demand": 21,
-            "lat": 22.3480756,
-            "lon": 87.3075125
+            "demand_kg": 21.0,
+            "demand_units": 4,
+            "lat": 22.3203351,
+            "lon": 87.3061991,
+            "time_window": [
+                721,
+                811
+            ],
+            "service_time_min": 3,
+            "category": "amenity:cafe",
+            "name": "Jayenta Night Canteen"
         },
         {
-            "node_id": 9452292334,
-            "demand": 3,
-            "lat": 22.3537996,
-            "lon": 87.329717
+            "node_id": 3682898039,
+            "demand": 30,
+            "demand_kg": 30.0,
+            "demand_units": 1,
+            "lat": 22.3404784,
+            "lon": 87.3172798,
+            "time_window": [
+                415,
+                535
+            ],
+            "service_time_min": 7,
+            "category": "shop:gift",
+            "name": "fancy  gift "
         },
         {
-            "node_id": 9446982835,
-            "demand": 11,
-            "lat": 22.3523643,
-            "lon": 87.2998789
-        },
-        {
-            "node_id": 9447223518,
-            "demand": 7,
-            "lat": 22.3547579,
-            "lon": 87.3059389
+            "node_id": 9455028279,
+            "demand": 50,
+            "demand_kg": 50.0,
+            "demand_units": 4,
+            "lat": 22.3468529,
+            "lon": 87.2809965,
+            "time_window": [
+                650,
+                740
+            ],
+            "service_time_min": 5,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9455028279"
         },
         {
             "node_id": 4206978997,
-            "demand": 37,
+            "demand": 34,
+            "demand_kg": 34.0,
+            "demand_units": 5,
             "lat": 22.3439135,
-            "lon": 87.3199609
+            "lon": 87.3199609,
+            "time_window": [
+                559,
+                649
+            ],
+            "service_time_min": 5,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_4206978997"
         },
         {
-            "node_id": 9447000141,
-            "demand": 7,
-            "lat": 22.3493121,
-            "lon": 87.3025625
-        },
-        {
-            "node_id": 9454583139,
+            "node_id": 5297628018,
             "demand": 16,
-            "lat": 22.3293981,
-            "lon": 87.3275573
+            "demand_kg": 16.0,
+            "demand_units": 3,
+            "lat": 22.3196523,
+            "lon": 87.309464,
+            "time_window": [
+                1106,
+                1286
+            ],
+            "service_time_min": 7,
+            "category": "amenity:library",
+            "name": "Central Library"
         },
         {
-            "node_id": 9446673963,
-            "demand": 48,
-            "lat": 22.3430603,
-            "lon": 87.2979041
+            "node_id": 2613601368,
+            "demand": 9,
+            "demand_kg": 9.0,
+            "demand_units": 2,
+            "lat": 22.317996,
+            "lon": 87.3141759,
+            "time_window": [
+                414,
+                474
+            ],
+            "service_time_min": 5,
+            "category": "office:educational_institution",
+            "name": "Robotics Lab"
         },
         {
-            "node_id": 9465253012,
+            "node_id": 9444368284,
+            "demand": 45,
+            "demand_kg": 45.0,
+            "demand_units": 2,
+            "lat": 22.3563296,
+            "lon": 87.2903439,
+            "time_window": [
+                498,
+                558
+            ],
+            "service_time_min": 6,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9444368284"
+        },
+        {
+            "node_id": 11140840195,
+            "demand": 22,
+            "demand_kg": 22.0,
+            "demand_units": 2,
+            "lat": 22.3203351,
+            "lon": 87.3061991,
+            "time_window": [
+                1051,
+                1291
+            ],
+            "service_time_min": 6,
+            "category": "amenity:restaurant",
+            "name": "VS Canteen"
+        },
+        {
+            "node_id": 9454571362,
+            "demand": 23,
+            "demand_kg": 23.0,
+            "demand_units": 2,
+            "lat": 22.3356209,
+            "lon": 87.2830249,
+            "time_window": [
+                786,
+                876
+            ],
+            "service_time_min": 2,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9454571362"
+        },
+        {
+            "node_id": 1361111333,
+            "demand": 6,
+            "demand_kg": 6.0,
+            "demand_units": 2,
+            "lat": 22.3224812,
+            "lon": 87.3101957,
+            "time_window": [
+                968,
+                1148
+            ],
+            "service_time_min": 3,
+            "category": "amenity:bank",
+            "name": "State Bank of India"
+        },
+        {
+            "node_id": 9451619239,
+            "demand": 6,
+            "demand_kg": 6.0,
+            "demand_units": 1,
+            "lat": 22.3166163,
+            "lon": 87.2932695,
+            "time_window": [
+                447,
+                627
+            ],
+            "service_time_min": 4,
+            "category": "amenity:hospital",
+            "name": "Amiyaa Maternity Cum Nursing Home"
+        },
+        {
+            "node_id": 9447183973,
+            "demand": 50,
+            "demand_kg": 50.0,
+            "demand_units": 2,
+            "lat": 22.3545008,
+            "lon": 87.3037951,
+            "time_window": [
+                776,
+                896
+            ],
+            "service_time_min": 3,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9447183973"
+        },
+        {
+            "node_id": 9462197204,
             "demand": 17,
-            "lat": 22.3515089,
-            "lon": 87.3281172
+            "demand_kg": 17.0,
+            "demand_units": 4,
+            "lat": 22.3429871,
+            "lon": 87.2767577,
+            "time_window": [
+                1112,
+                1202
+            ],
+            "service_time_min": 4,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9462197204"
         },
         {
-            "node_id": 9451999798,
-            "demand": 10,
-            "lat": 22.3306844,
-            "lon": 87.27468
+            "node_id": 9444550676,
+            "demand": 17,
+            "demand_kg": 17.0,
+            "demand_units": 3,
+            "lat": 22.3176115,
+            "lon": 87.2899299,
+            "time_window": [
+                975,
+                1065
+            ],
+            "service_time_min": 5,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9444550676"
         },
         {
-            "node_id": 9447003926,
-            "demand": 7,
-            "lat": 22.3390132,
-            "lon": 87.2951319
+            "node_id": 12543365684,
+            "demand": 47,
+            "demand_kg": 47.0,
+            "demand_units": 4,
+            "lat": 22.3408641,
+            "lon": 87.3036444,
+            "time_window": [
+                942,
+                1032
+            ],
+            "service_time_min": 6,
+            "category": "amenity:hospital",
+            "name": "TB HOSPITAL"
         },
         {
-            "node_id": 5291677810,
-            "demand": 16,
-            "lat": 22.3372382,
-            "lon": 87.2982204
+            "node_id": 9464994755,
+            "demand": 17,
+            "demand_kg": 17.0,
+            "demand_units": 2,
+            "lat": 22.345733,
+            "lon": 87.3168622,
+            "time_window": [
+                400,
+                520
+            ],
+            "service_time_min": 4,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9464994755"
         },
         {
-            "node_id": 9455028463,
-            "demand": 35,
-            "lat": 22.3453584,
-            "lon": 87.2900103
+            "node_id": 9461998221,
+            "demand": 9,
+            "demand_kg": 9.0,
+            "demand_units": 3,
+            "lat": 22.3449479,
+            "lon": 87.2796882,
+            "time_window": [
+                524,
+                614
+            ],
+            "service_time_min": 6,
+            "category": "amenity:commercial_stop",
+            "name": "Customer_Stop_9461998221"
         }
     ],
     "vehicle_capacity": 100,
     "num_vehicles": 5,
     "distance_matrix": "ref:data/processed/distance_matrix.npy",
-    "node_id_map": "ref:data/processed/node_id_map.json"
+    "travel_time_matrix": "ref:data/processed/travel_time_matrix.npy",
+    "node_id_map": "ref:data/processed/node_id_map.json",
+    "fleet": [
+        {
+            "type": "two_wheeler",
+            "description": "Motorcycle / Scooter Courier",
+            "capacity_kg": 15,
+            "capacity_units": 5,
+            "cost_per_km_inr": 7.03,
+            "fixed_cost_inr": 150.0,
+            "max_range_km": 40,
+            "speed_factor": 0.88
+        },
+        {
+            "type": "three_wheeler",
+            "description": "Auto-Rickshaw / Commercial Tempo",
+            "capacity_kg": 200,
+            "capacity_units": 30,
+            "cost_per_km_inr": 8.0,
+            "fixed_cost_inr": 300.0,
+            "max_range_km": 60,
+            "speed_factor": 0.82
+        },
+        {
+            "type": "lcv",
+            "description": "Light Commercial Vehicle (Tata Ace / Dost)",
+            "capacity_kg": 750,
+            "capacity_units": 80,
+            "cost_per_km_inr": 7.05,
+            "fixed_cost_inr": 600.0,
+            "max_range_km": 120,
+            "speed_factor": 0.68
+        }
+    ],
+    "cost_weights": {
+        "distance_weight": 1.0,
+        "time_weight": 1.5,
+        "congestion_weight": 0.8,
+        "vehicle_cost_weight": 1.0
+    },
+    "time_aware_weights": "ref:data/processed/time_aware_weights.json"
 }

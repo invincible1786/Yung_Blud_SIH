@@ -1,0 +1,30 @@
+{
+  "source": "kaggle_delivery_logistics_india",
+  "csv_path": "data\\raw\\kaggle_delivery.csv",
+  "total_rows": 25000,
+  "usable_rows": 25000,
+  "weight_kg_fit": {
+    "mu": 2.941,
+    "sigma": 0.918,
+    "min": 0.67,
+    "max": 49.52,
+    "n_rows": 25000
+  },
+  "vehicle_stats": {
+    "two_wheeler": {
+      "n_rows": 12552,
+      "cost_per_km_inr": 7.03,
+      "mode_share": 0.502
+    },
+    "three_wheeler": {
+      "n_rows": 0,
+      "cost_per_km_inr": 8.0,
+      "mode_share": 0.33
+    },
+    "lcv": {
+      "n_rows": 12448,
+      "cost_per_km_inr": 7.05,
+      "mode_share": 0.498
+    }
+  }
+}

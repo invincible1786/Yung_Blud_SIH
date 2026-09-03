@@ -1,0 +1,2081 @@
+{
+  "city": "Kharagpur, West Bengal, India",
+  "total_customers": 120,
+  "distributions_used": {
+    "weight_kg": {
+      "distribution": "lognormal",
+      "mu": 2.941,
+      "sigma": 0.918,
+      "min": 0.67,
+      "max": 49.52,
+      "fitted_from_n_rows": 25000
+    },
+    "quantity": {
+      "distribution": "poisson",
+      "lam": 2.5,
+      "min": 1,
+      "max": 15
+    },
+    "time_window_width_min": {
+      "distribution": "choice",
+      "values": [
+        30,
+        60,
+        90,
+        120,
+        180,
+        240
+      ],
+      "weights": [
+        0.05,
+        0.15,
+        0.25,
+        0.3,
+        0.15,
+        0.1
+      ]
+    }
+  },
+  "customers": [
+    {
+      "id": 0,
+      "name": "TB HOSPITAL",
+      "category": "amenity:hospital",
+      "osm_id": "1467951643",
+      "lon": 87.303566,
+      "lat": 22.341022,
+      "graph_node": 12543365684,
+      "snap_distance_deg": 0.000176,
+      "demand_kg": 46.06,
+      "demand_units": 4,
+      "time_window": [
+        942,
+        1032
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 1,
+      "name": "Andhra Bank",
+      "category": "amenity:bank",
+      "osm_id": "1467963927",
+      "lon": 87.292097,
+      "lat": 22.344317,
+      "graph_node": 9455028441,
+      "snap_distance_deg": 0.000546,
+      "demand_kg": 4.04,
+      "demand_units": 1,
+      "time_window": [
+        755,
+        875
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 2,
+      "name": "HDFC Bank",
+      "category": "amenity:bank",
+      "osm_id": "1467964059",
+      "lon": 87.29126,
+      "lat": 22.344624,
+      "graph_node": 9462205995,
+      "snap_distance_deg": 0.000501,
+      "demand_kg": 13.92,
+      "demand_units": 2,
+      "time_window": [
+        515,
+        635
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 3,
+      "name": "IDBI Bank",
+      "category": "amenity:bank",
+      "osm_id": "1467964424",
+      "lon": 87.293342,
+      "lat": 22.344669,
+      "graph_node": 9462170711,
+      "snap_distance_deg": 9.4e-05,
+      "demand_kg": 21.99,
+      "demand_units": 2,
+      "time_window": [
+        483,
+        723
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 4,
+      "name": "Axis Bank",
+      "category": "amenity:bank",
+      "osm_id": "1467964812",
+      "lon": 87.293798,
+      "lat": 22.344674,
+      "graph_node": 9446961347,
+      "snap_distance_deg": 7.4e-05,
+      "demand_kg": 32.43,
+      "demand_units": 3,
+      "time_window": [
+        832,
+        952
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 5,
+      "name": "State Bank of India",
+      "category": "amenity:bank",
+      "osm_id": "1467964898",
+      "lon": 87.293991,
+      "lat": 22.344396,
+      "graph_node": 9446961345,
+      "snap_distance_deg": 0.000265,
+      "demand_kg": 36.38,
+      "demand_units": 4,
+      "time_window": [
+        628,
+        748
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 6,
+      "name": "Tikka",
+      "category": "amenity:restaurant",
+      "osm_id": "1471010529",
+      "lon": 87.307421,
+      "lat": 22.316684,
+      "graph_node": 5297589434,
+      "snap_distance_deg": 0.00045,
+      "demand_kg": 39.22,
+      "demand_units": 1,
+      "time_window": [
+        439,
+        619
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 7,
+      "name": "Technology Club",
+      "category": "amenity:community_centre",
+      "osm_id": "1471021264",
+      "lon": 87.303421,
+      "lat": 22.316964,
+      "graph_node": 2614507396,
+      "snap_distance_deg": 0.001194,
+      "demand_kg": 13.75,
+      "demand_units": 1,
+      "time_window": [
+        667,
+        907
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 8,
+      "name": "Veggies",
+      "category": "amenity:restaurant",
+      "osm_id": "1471051373",
+      "lon": 87.305498,
+      "lat": 22.317671,
+      "graph_node": 2614507396,
+      "snap_distance_deg": 0.001357,
+      "demand_kg": 12.39,
+      "demand_units": 2,
+      "time_window": [
+        909,
+        1029
+      ],
+      "service_time_min": 9
+    },
+    {
+      "id": 9,
+      "name": "Kalida's Canteen",
+      "category": "amenity:restaurant",
+      "osm_id": "1471074518",
+      "lon": 87.315166,
+      "lat": 22.319751,
+      "graph_node": 2613601368,
+      "snap_distance_deg": 0.002015,
+      "demand_kg": 41.62,
+      "demand_units": 2,
+      "time_window": [
+        589,
+        829
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 10,
+      "name": "Central Library",
+      "category": "amenity:library",
+      "osm_id": "1471086483",
+      "lon": 87.309857,
+      "lat": 22.320202,
+      "graph_node": 5297628018,
+      "snap_distance_deg": 0.000676,
+      "demand_kg": 15.89,
+      "demand_units": 3,
+      "time_window": [
+        1106,
+        1286
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 11,
+      "name": "State Bank of India",
+      "category": "amenity:bank",
+      "osm_id": "1471123545",
+      "lon": 87.310659,
+      "lat": 22.322061,
+      "graph_node": 1361111333,
+      "snap_distance_deg": 0.000626,
+      "demand_kg": 5.87,
+      "demand_units": 2,
+      "time_window": [
+        968,
+        1148
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 12,
+      "name": "Bidhan Chandra Roy Technology Hospital",
+      "category": "amenity:hospital",
+      "osm_id": "1471137964",
+      "lon": 87.300438,
+      "lat": 22.316676,
+      "graph_node": 2614487336,
+      "snap_distance_deg": 0.000774,
+      "demand_kg": 6.69,
+      "demand_units": 4,
+      "time_window": [
+        821,
+        881
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 13,
+      "name": "Railway Reservation Counter",
+      "category": "shop:kiosk",
+      "osm_id": "1471143149",
+      "lon": 87.30885,
+      "lat": 22.319108,
+      "graph_node": 5297589430,
+      "snap_distance_deg": 0.000617,
+      "demand_kg": 8.14,
+      "demand_units": 1,
+      "time_window": [
+        1146,
+        1266
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 14,
+      "name": "Tech Market",
+      "category": "amenity:marketplace",
+      "osm_id": "2614492892",
+      "lon": 87.300284,
+      "lat": 22.3146,
+      "graph_node": 2614492894,
+      "snap_distance_deg": 0.00235,
+      "demand_kg": 29.89,
+      "demand_units": 2,
+      "time_window": [
+        737,
+        827
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 15,
+      "name": "Sahara",
+      "category": "amenity:restaurant",
+      "osm_id": "2614562971",
+      "lon": 87.30643,
+      "lat": 22.314146,
+      "graph_node": 5297589434,
+      "snap_distance_deg": 0.002979,
+      "demand_kg": 21.58,
+      "demand_units": 1,
+      "time_window": [
+        477,
+        597
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 16,
+      "name": "Heritage",
+      "category": "amenity:restaurant",
+      "osm_id": "2614562974",
+      "lon": 87.306446,
+      "lat": 22.319237,
+      "graph_node": 11140840194,
+      "snap_distance_deg": 0.000427,
+      "demand_kg": 35.69,
+      "demand_units": 6,
+      "time_window": [
+        390,
+        510
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 17,
+      "name": "Cafe Coffee Day",
+      "category": "amenity:cafe",
+      "osm_id": "2614562977",
+      "lon": 87.306404,
+      "lat": 22.319403,
+      "graph_node": 11140840194,
+      "snap_distance_deg": 0.000257,
+      "demand_kg": 12.79,
+      "demand_units": 2,
+      "time_window": [
+        1036,
+        1276
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 18,
+      "name": "VS Canteen",
+      "category": "amenity:restaurant",
+      "osm_id": "2614563003",
+      "lon": 87.305049,
+      "lat": 22.320278,
+      "graph_node": 11140840195,
+      "snap_distance_deg": 0.001151,
+      "demand_kg": 21.9,
+      "demand_units": 2,
+      "time_window": [
+        1051,
+        1291
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 19,
+      "name": "Dreamland",
+      "category": "amenity:restaurant",
+      "osm_id": "2614566610",
+      "lon": 87.306144,
+      "lat": 22.313697,
+      "graph_node": 2614507396,
+      "snap_distance_deg": 0.003362,
+      "demand_kg": 33.63,
+      "demand_units": 3,
+      "time_window": [
+        1003,
+        1093
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 20,
+      "name": "Billoo's",
+      "category": "amenity:restaurant",
+      "osm_id": "2614566614",
+      "lon": 87.305955,
+      "lat": 22.320899,
+      "graph_node": 11140840195,
+      "snap_distance_deg": 0.000615,
+      "demand_kg": 14.25,
+      "demand_units": 4,
+      "time_window": [
+        446,
+        566
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 21,
+      "name": "Hijli Telephone Exchange",
+      "category": "office:telecommunication",
+      "osm_id": "2614945487",
+      "lon": 87.298785,
+      "lat": 22.311977,
+      "graph_node": 7127613425,
+      "snap_distance_deg": 0.005004,
+      "demand_kg": 28.8,
+      "demand_units": 3,
+      "time_window": [
+        606,
+        726
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 22,
+      "name": "Frank Ross Pharmacy",
+      "category": "amenity:pharmacy",
+      "osm_id": "2615001824",
+      "lon": 87.300517,
+      "lat": 22.316826,
+      "graph_node": 2614487336,
+      "snap_distance_deg": 0.000607,
+      "demand_kg": 10.31,
+      "demand_units": 1,
+      "time_window": [
+        395,
+        485
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 23,
+      "name": "IIT Staff Canteen",
+      "category": "amenity:restaurant",
+      "osm_id": "3009167929",
+      "lon": 87.308765,
+      "lat": 22.319155,
+      "graph_node": 5297589430,
+      "snap_distance_deg": 0.000551,
+      "demand_kg": 13.57,
+      "demand_units": 2,
+      "time_window": [
+        406,
+        466
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 24,
+      "name": "Axis Bank",
+      "category": "amenity:bank",
+      "osm_id": "3437297157",
+      "lon": 87.303238,
+      "lat": 22.318771,
+      "graph_node": 2613601300,
+      "snap_distance_deg": 0.000561,
+      "demand_kg": 13.34,
+      "demand_units": 1,
+      "time_window": [
+        589,
+        619
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 25,
+      "name": "sitala  mistanna  bhandar",
+      "category": "shop:confectionery",
+      "osm_id": "4271011790",
+      "lon": 87.316731,
+      "lat": 22.341617,
+      "graph_node": 9446866270,
+      "snap_distance_deg": 0.000336,
+      "demand_kg": 6.32,
+      "demand_units": 2,
+      "time_window": [
+        806,
+        986
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 26,
+      "name": "fancy  gift ",
+      "category": "shop:gift",
+      "osm_id": "4271023090",
+      "lon": 87.317426,
+      "lat": 22.340664,
+      "graph_node": 3682898039,
+      "snap_distance_deg": 0.000237,
+      "demand_kg": 29.61,
+      "demand_units": 1,
+      "time_window": [
+        415,
+        535
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 27,
+      "name": "Allahabad Bank",
+      "category": "amenity:bank",
+      "osm_id": "4273093199",
+      "lon": 87.316892,
+      "lat": 22.342637,
+      "graph_node": 9465035071,
+      "snap_distance_deg": 0.000248,
+      "demand_kg": 12.31,
+      "demand_units": 1,
+      "time_window": [
+        1069,
+        1309
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 28,
+      "name": "Bharat Petroleum",
+      "category": "amenity:fuel",
+      "osm_id": "5291676784",
+      "lon": 87.325822,
+      "lat": 22.338573,
+      "graph_node": 3599447609,
+      "snap_distance_deg": 0.000399,
+      "demand_kg": 19.15,
+      "demand_units": 1,
+      "time_window": [
+        742,
+        862
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 29,
+      "name": "Big Bazaar",
+      "category": "shop:supermarket",
+      "osm_id": "5291677753",
+      "lon": 87.301366,
+      "lat": 22.3419,
+      "graph_node": 9447012627,
+      "snap_distance_deg": 0.000546,
+      "demand_kg": 29.44,
+      "demand_units": 1,
+      "time_window": [
+        550,
+        790
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 30,
+      "name": "Gate Bazaar",
+      "category": "amenity:marketplace",
+      "osm_id": "5291677754",
+      "lon": 87.306563,
+      "lat": 22.337336,
+      "graph_node": 5297588210,
+      "snap_distance_deg": 0.00013,
+      "demand_kg": 28.53,
+      "demand_units": 3,
+      "time_window": [
+        809,
+        899
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 31,
+      "name": "Sacred Heart High School",
+      "category": "amenity:school",
+      "osm_id": "6060293708",
+      "lon": 87.324191,
+      "lat": 22.331977,
+      "graph_node": 3743556430,
+      "snap_distance_deg": 0.000434,
+      "demand_kg": 34.88,
+      "demand_units": 3,
+      "time_window": [
+        977,
+        1157
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 32,
+      "name": "In-Motion Train Driving Simulator (WDG-4)",
+      "category": "office:educational_institution",
+      "osm_id": "6243272877",
+      "lon": 87.31097,
+      "lat": 22.330042,
+      "graph_node": 5287221858,
+      "snap_distance_deg": 0.000266,
+      "demand_kg": 17.3,
+      "demand_units": 1,
+      "time_window": [
+        641,
+        701
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 33,
+      "name": "Mercy Nursing Home",
+      "category": "amenity:clinic",
+      "osm_id": "7048080556",
+      "lon": 87.30023,
+      "lat": 22.345042,
+      "graph_node": 9447000167,
+      "snap_distance_deg": 0.000652,
+      "demand_kg": 12.84,
+      "demand_units": 2,
+      "time_window": [
+        399,
+        519
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 34,
+      "name": "Sanjeevani Hill Nursing Home",
+      "category": "amenity:clinic",
+      "osm_id": "7048106390",
+      "lon": 87.33334,
+      "lat": 22.330132,
+      "graph_node": 9454859259,
+      "snap_distance_deg": 0.003388,
+      "demand_kg": 17.6,
+      "demand_units": 1,
+      "time_window": [
+        399,
+        579
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 35,
+      "name": "Quality Health Care Centre",
+      "category": "amenity:hospital",
+      "osm_id": "7048258524",
+      "lon": 87.315396,
+      "lat": 22.326372,
+      "graph_node": 11268826051,
+      "snap_distance_deg": 0.000404,
+      "demand_kg": 4.02,
+      "demand_units": 2,
+      "time_window": [
+        974,
+        1214
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 36,
+      "name": "Amiyaa Maternity Cum Nursing Home",
+      "category": "amenity:hospital",
+      "osm_id": "7065871412",
+      "lon": 87.293276,
+      "lat": 22.316786,
+      "graph_node": 9451619239,
+      "snap_distance_deg": 0.000169,
+      "demand_kg": 5.02,
+      "demand_units": 1,
+      "time_window": [
+        447,
+        627
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 37,
+      "name": "Chakraborty Nursing Home",
+      "category": "amenity:clinic",
+      "osm_id": "7068848829",
+      "lon": 87.306623,
+      "lat": 22.340269,
+      "graph_node": 9446683235,
+      "snap_distance_deg": 0.000785,
+      "demand_kg": 5.62,
+      "demand_units": 2,
+      "time_window": [
+        951,
+        981
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 38,
+      "name": "Kharagpur Sathi Health Care For Aged",
+      "category": "amenity:hospital",
+      "osm_id": "7071466610",
+      "lon": 87.314286,
+      "lat": 22.32561,
+      "graph_node": 9457173408,
+      "snap_distance_deg": 0.000308,
+      "demand_kg": 7.58,
+      "demand_units": 6,
+      "time_window": [
+        694,
+        784
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 39,
+      "name": "Bimal Arogya Niketan",
+      "category": "amenity:hospital",
+      "osm_id": "7071466638",
+      "lon": 87.290021,
+      "lat": 22.344267,
+      "graph_node": 9455028465,
+      "snap_distance_deg": 0.000188,
+      "demand_kg": 27.33,
+      "demand_units": 4,
+      "time_window": [
+        1083,
+        1113
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 40,
+      "name": "Robotics Lab",
+      "category": "office:educational_institution",
+      "osm_id": "9192617541",
+      "lon": 87.31308,
+      "lat": 22.319119,
+      "graph_node": 2613601368,
+      "snap_distance_deg": 0.001569,
+      "demand_kg": 8.25,
+      "demand_units": 2,
+      "time_window": [
+        414,
+        474
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 41,
+      "name": "Astha HJB Canteen",
+      "category": "amenity:cafe",
+      "osm_id": "9596911625",
+      "lon": 87.303054,
+      "lat": 22.320019,
+      "graph_node": 2613601305,
+      "snap_distance_deg": 0.000896,
+      "demand_kg": 13.38,
+      "demand_units": 2,
+      "time_window": [
+        1115,
+        1235
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 42,
+      "name": "Thomas Tea Stall",
+      "category": "amenity:cafe",
+      "osm_id": "10279212509",
+      "lon": 87.324495,
+      "lat": 22.335668,
+      "graph_node": 3743556456,
+      "snap_distance_deg": 0.001058,
+      "demand_kg": 49.52,
+      "demand_units": 2,
+      "time_window": [
+        947,
+        1067
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 43,
+      "name": "South Institute Bakery",
+      "category": "shop:bakery",
+      "osm_id": "10279212609",
+      "lon": 87.325096,
+      "lat": 22.33577,
+      "graph_node": 3743556459,
+      "snap_distance_deg": 0.000983,
+      "demand_kg": 13.65,
+      "demand_units": 2,
+      "time_window": [
+        710,
+        890
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 44,
+      "name": "Nantu Chowmin Stall",
+      "category": "amenity:fast_food",
+      "osm_id": "10279212709",
+      "lon": 87.319924,
+      "lat": 22.340819,
+      "graph_node": 9465695815,
+      "snap_distance_deg": 0.001252,
+      "demand_kg": 37.26,
+      "demand_units": 4,
+      "time_window": [
+        521,
+        701
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 45,
+      "name": "Super Duper",
+      "category": "amenity:cafe",
+      "osm_id": "11254549311",
+      "lon": 87.299039,
+      "lat": 22.315633,
+      "graph_node": 2613601325,
+      "snap_distance_deg": 0.001514,
+      "demand_kg": 8.04,
+      "demand_units": 5,
+      "time_window": [
+        1181,
+        1301
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 46,
+      "name": "Peep\u2019s Kitchen",
+      "category": "amenity:restaurant",
+      "osm_id": "11254549312",
+      "lon": 87.299956,
+      "lat": 22.314623,
+      "graph_node": 2614492894,
+      "snap_distance_deg": 0.002479,
+      "demand_kg": 15.68,
+      "demand_units": 4,
+      "time_window": [
+        595,
+        775
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 47,
+      "name": "Rao Canteen",
+      "category": "amenity:cafe",
+      "osm_id": "11257500264",
+      "lon": 87.311115,
+      "lat": 22.31674,
+      "graph_node": 1471100885,
+      "snap_distance_deg": 0.001384,
+      "demand_kg": 7.92,
+      "demand_units": 1,
+      "time_window": [
+        816,
+        846
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 48,
+      "name": "Glow In Beauty Parlour",
+      "category": "shop:beauty",
+      "osm_id": "11275501796",
+      "lon": 87.300437,
+      "lat": 22.316084,
+      "graph_node": 2614492894,
+      "snap_distance_deg": 0.001033,
+      "demand_kg": 13.87,
+      "demand_units": 1,
+      "time_window": [
+        703,
+        793
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 49,
+      "name": "The New Tikka",
+      "category": "amenity:fast_food",
+      "osm_id": "11275501800",
+      "lon": 87.307196,
+      "lat": 22.316272,
+      "graph_node": 5297589434,
+      "snap_distance_deg": 0.000767,
+      "demand_kg": 40.95,
+      "demand_units": 4,
+      "time_window": [
+        553,
+        673
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 50,
+      "name": "Subway",
+      "category": "amenity:fast_food",
+      "osm_id": "11275522027",
+      "lon": 87.316824,
+      "lat": 22.31556,
+      "graph_node": 2613601372,
+      "snap_distance_deg": 0.002487,
+      "demand_kg": 3.88,
+      "demand_units": 5,
+      "time_window": [
+        685,
+        865
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 51,
+      "name": "MFS Canteen",
+      "category": "amenity:fast_food",
+      "osm_id": "11275522028",
+      "lon": 87.317155,
+      "lat": 22.31568,
+      "graph_node": 2613601372,
+      "snap_distance_deg": 0.002768,
+      "demand_kg": 28.21,
+      "demand_units": 2,
+      "time_window": [
+        501,
+        531
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 52,
+      "name": "Rakhal Shop",
+      "category": "shop:convenience",
+      "osm_id": "11275572790",
+      "lon": 87.310629,
+      "lat": 22.312029,
+      "graph_node": 1471100885,
+      "snap_distance_deg": 0.005469,
+      "demand_kg": 23.55,
+      "demand_units": 5,
+      "time_window": [
+        361,
+        481
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 53,
+      "name": "Center for Artificial Intelligence",
+      "category": "office:educational_institution",
+      "osm_id": "12651769983",
+      "lon": 87.321359,
+      "lat": 22.316413,
+      "graph_node": 12651769992,
+      "snap_distance_deg": 0.000438,
+      "demand_kg": 10.97,
+      "demand_units": 2,
+      "time_window": [
+        603,
+        723
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 54,
+      "name": "HDFC Bank",
+      "category": "amenity:bank",
+      "osm_id": "13566330497",
+      "lon": 87.316748,
+      "lat": 22.315621,
+      "graph_node": 2613601372,
+      "snap_distance_deg": 0.002395,
+      "demand_kg": 5.02,
+      "demand_units": 1,
+      "time_window": [
+        464,
+        494
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 55,
+      "name": "Jayenta Night Canteen",
+      "category": "amenity:cafe",
+      "osm_id": "13566390484",
+      "lon": 87.306489,
+      "lat": 22.320677,
+      "graph_node": 11140840195,
+      "snap_distance_deg": 0.000448,
+      "demand_kg": 20.23,
+      "demand_units": 4,
+      "time_window": [
+        721,
+        811
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 56,
+      "name": "Department of Mathematics",
+      "category": "amenity:college",
+      "osm_id": "13584134292",
+      "lon": 87.311188,
+      "lat": 22.32009,
+      "graph_node": 5297628018,
+      "snap_distance_deg": 0.001779,
+      "demand_kg": 11.65,
+      "demand_units": 3,
+      "time_window": [
+        1033,
+        1213
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 57,
+      "name": "Department of Electrical Engineering",
+      "category": "amenity:college",
+      "osm_id": "13584134293",
+      "lon": 87.311276,
+      "lat": 22.320028,
+      "graph_node": 5297628018,
+      "snap_distance_deg": 0.001851,
+      "demand_kg": 23.44,
+      "demand_units": 1,
+      "time_window": [
+        496,
+        616
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 58,
+      "name": "Department of Humanities and Social Science",
+      "category": "amenity:college",
+      "osm_id": "13584134295",
+      "lon": 87.310631,
+      "lat": 22.318858,
+      "graph_node": 5297628018,
+      "snap_distance_deg": 0.001412,
+      "demand_kg": 19.32,
+      "demand_units": 2,
+      "time_window": [
+        361,
+        451
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 59,
+      "name": "Customer_Stop_9457375228",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9457375228",
+      "lon": 87.302781,
+      "lat": 22.327261,
+      "graph_node": 9457375228,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 5,
+      "time_window": [
+        446,
+        626
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 60,
+      "name": "Customer_Stop_9454876387",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454876387",
+      "lon": 87.273629,
+      "lat": 22.334587,
+      "graph_node": 9454876387,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 15.2,
+      "demand_units": 4,
+      "time_window": [
+        802,
+        892
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 61,
+      "name": "Customer_Stop_9451969216",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451969216",
+      "lon": 87.273944,
+      "lat": 22.322878,
+      "graph_node": 9451969216,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 7.4,
+      "demand_units": 2,
+      "time_window": [
+        574,
+        754
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 62,
+      "name": "Customer_Stop_9454571362",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454571362",
+      "lon": 87.283025,
+      "lat": 22.335621,
+      "graph_node": 9454571362,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 22.32,
+      "demand_units": 2,
+      "time_window": [
+        786,
+        876
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 63,
+      "name": "Customer_Stop_9462206017",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9462206017",
+      "lon": 87.286633,
+      "lat": 22.350041,
+      "graph_node": 9462206017,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 23.17,
+      "demand_units": 3,
+      "time_window": [
+        384,
+        504
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 64,
+      "name": "Customer_Stop_9455028279",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455028279",
+      "lon": 87.280997,
+      "lat": 22.346853,
+      "graph_node": 9455028279,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 4,
+      "time_window": [
+        650,
+        740
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 65,
+      "name": "Customer_Stop_9455028429",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455028429",
+      "lon": 87.287671,
+      "lat": 22.346668,
+      "graph_node": 9455028429,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 40.76,
+      "demand_units": 4,
+      "time_window": [
+        717,
+        807
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 66,
+      "name": "Customer_Stop_9465035680",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465035680",
+      "lon": 87.325777,
+      "lat": 22.34768,
+      "graph_node": 9465035680,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 26.27,
+      "demand_units": 3,
+      "time_window": [
+        696,
+        876
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 67,
+      "name": "Customer_Stop_9452292323",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9452292323",
+      "lon": 87.329325,
+      "lat": 22.353485,
+      "graph_node": 9452292323,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 1,
+      "time_window": [
+        856,
+        916
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 68,
+      "name": "Customer_Stop_9464978612",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9464978612",
+      "lon": 87.317288,
+      "lat": 22.347539,
+      "graph_node": 9464978612,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 6.36,
+      "demand_units": 1,
+      "time_window": [
+        1063,
+        1123
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 69,
+      "name": "Customer_Stop_9446961449",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446961449",
+      "lon": 87.298082,
+      "lat": 22.349275,
+      "graph_node": 9446961449,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 10.52,
+      "demand_units": 4,
+      "time_window": [
+        766,
+        856
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 70,
+      "name": "Customer_Stop_9451969210",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451969210",
+      "lon": 87.272371,
+      "lat": 22.323609,
+      "graph_node": 9451969210,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 8.09,
+      "demand_units": 1,
+      "time_window": [
+        1067,
+        1187
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 71,
+      "name": "Customer_Stop_9451981971",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451981971",
+      "lon": 87.278721,
+      "lat": 22.328812,
+      "graph_node": 9451981971,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 13.24,
+      "demand_units": 1,
+      "time_window": [
+        773,
+        953
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 72,
+      "name": "Customer_Stop_9447088153",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9447088153",
+      "lon": 87.311019,
+      "lat": 22.34508,
+      "graph_node": 9447088153,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 5.35,
+      "demand_units": 4,
+      "time_window": [
+        547,
+        787
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 73,
+      "name": "Customer_Stop_4206978997",
+      "category": "amenity:commercial_stop",
+      "osm_id": "4206978997",
+      "lon": 87.319961,
+      "lat": 22.343913,
+      "graph_node": 4206978997,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 33.92,
+      "demand_units": 5,
+      "time_window": [
+        559,
+        649
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 74,
+      "name": "Customer_Stop_9455198367",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455198367",
+      "lon": 87.321995,
+      "lat": 22.320684,
+      "graph_node": 9455198367,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 15.44,
+      "demand_units": 1,
+      "time_window": [
+        640,
+        730
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 75,
+      "name": "Customer_Stop_9447000167",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9447000167",
+      "lon": 87.300182,
+      "lat": 22.345692,
+      "graph_node": 9447000167,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 4.91,
+      "demand_units": 4,
+      "time_window": [
+        898,
+        958
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 76,
+      "name": "Customer_Stop_9455136485",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455136485",
+      "lon": 87.32291,
+      "lat": 22.320009,
+      "graph_node": 9455136485,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 7.45,
+      "demand_units": 2,
+      "time_window": [
+        563,
+        683
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 77,
+      "name": "Customer_Stop_9444510121",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9444510121",
+      "lon": 87.286943,
+      "lat": 22.317559,
+      "graph_node": 9444510121,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 25.25,
+      "demand_units": 3,
+      "time_window": [
+        1019,
+        1259
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 78,
+      "name": "Customer_Stop_9452319947",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9452319947",
+      "lon": 87.326082,
+      "lat": 22.353092,
+      "graph_node": 9452319947,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 40.87,
+      "demand_units": 1,
+      "time_window": [
+        763,
+        883
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 79,
+      "name": "Customer_Stop_9452043436",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9452043436",
+      "lon": 87.277329,
+      "lat": 22.3306,
+      "graph_node": 9452043436,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 3,
+      "time_window": [
+        1086,
+        1206
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 80,
+      "name": "Customer_Stop_9454571345",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454571345",
+      "lon": 87.278209,
+      "lat": 22.335794,
+      "graph_node": 9454571345,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 3,
+      "time_window": [
+        955,
+        1045
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 81,
+      "name": "Customer_Stop_5297588191",
+      "category": "amenity:commercial_stop",
+      "osm_id": "5297588191",
+      "lon": 87.309448,
+      "lat": 22.33795,
+      "graph_node": 5297588191,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 27.7,
+      "demand_units": 2,
+      "time_window": [
+        600,
+        840
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 82,
+      "name": "Customer_Stop_9465113532",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465113532",
+      "lon": 87.325563,
+      "lat": 22.3449,
+      "graph_node": 9465113532,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 7.63,
+      "demand_units": 4,
+      "time_window": [
+        551,
+        671
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 83,
+      "name": "Customer_Stop_9446898990",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446898990",
+      "lon": 87.304034,
+      "lat": 22.345076,
+      "graph_node": 9446898990,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 2.67,
+      "demand_units": 2,
+      "time_window": [
+        1030,
+        1090
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 84,
+      "name": "Customer_Stop_9446961347",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446961347",
+      "lon": 87.293785,
+      "lat": 22.344601,
+      "graph_node": 9446961347,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 24.21,
+      "demand_units": 2,
+      "time_window": [
+        648,
+        738
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 85,
+      "name": "Customer_Stop_9455028297",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455028297",
+      "lon": 87.278506,
+      "lat": 22.347827,
+      "graph_node": 9455028297,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 8.98,
+      "demand_units": 1,
+      "time_window": [
+        582,
+        642
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 86,
+      "name": "Customer_Stop_9451868554",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451868554",
+      "lon": 87.278588,
+      "lat": 22.317254,
+      "graph_node": 9451868554,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 12.93,
+      "demand_units": 2,
+      "time_window": [
+        1170,
+        1260
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 87,
+      "name": "Customer_Stop_9465240824",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465240824",
+      "lon": 87.329802,
+      "lat": 22.34767,
+      "graph_node": 9465240824,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 10.8,
+      "demand_units": 3,
+      "time_window": [
+        809,
+        839
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 88,
+      "name": "Customer_Stop_9464994755",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9464994755",
+      "lon": 87.316862,
+      "lat": 22.345733,
+      "graph_node": 9464994755,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 16.64,
+      "demand_units": 2,
+      "time_window": [
+        400,
+        520
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 89,
+      "name": "Customer_Stop_9447183973",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9447183973",
+      "lon": 87.303795,
+      "lat": 22.354501,
+      "graph_node": 9447183973,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 2,
+      "time_window": [
+        776,
+        896
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 90,
+      "name": "Customer_Stop_9457200357",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9457200357",
+      "lon": 87.295854,
+      "lat": 22.328903,
+      "graph_node": 9457200357,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 21.87,
+      "demand_units": 5,
+      "time_window": [
+        761,
+        851
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 91,
+      "name": "Customer_Stop_9462197204",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9462197204",
+      "lon": 87.276758,
+      "lat": 22.342987,
+      "graph_node": 9462197204,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 16.37,
+      "demand_units": 4,
+      "time_window": [
+        1112,
+        1202
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 92,
+      "name": "Customer_Stop_9451690580",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451690580",
+      "lon": 87.305329,
+      "lat": 22.369989,
+      "graph_node": 9451690580,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 7.32,
+      "demand_units": 5,
+      "time_window": [
+        873,
+        1113
+      ],
+      "service_time_min": 7
+    },
+    {
+      "id": 93,
+      "name": "Customer_Stop_5297629638",
+      "category": "amenity:commercial_stop",
+      "osm_id": "5297629638",
+      "lon": 87.308727,
+      "lat": 22.319888,
+      "graph_node": 5297629638,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 4.07,
+      "demand_units": 4,
+      "time_window": [
+        509,
+        689
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 94,
+      "name": "Customer_Stop_9451804447",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451804447",
+      "lon": 87.282933,
+      "lat": 22.316415,
+      "graph_node": 9451804447,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 12.12,
+      "demand_units": 1,
+      "time_window": [
+        486,
+        606
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 95,
+      "name": "Customer_Stop_9454859278",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454859278",
+      "lon": 87.329847,
+      "lat": 22.32687,
+      "graph_node": 9454859278,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 18.02,
+      "demand_units": 1,
+      "time_window": [
+        885,
+        975
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 96,
+      "name": "Customer_Stop_9462006589",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9462006589",
+      "lon": 87.275791,
+      "lat": 22.344444,
+      "graph_node": 9462006589,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 2,
+      "time_window": [
+        396,
+        576
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 97,
+      "name": "Customer_Stop_9465050525",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465050525",
+      "lon": 87.324719,
+      "lat": 22.351313,
+      "graph_node": 9465050525,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 21.34,
+      "demand_units": 2,
+      "time_window": [
+        637,
+        727
+      ],
+      "service_time_min": 8
+    },
+    {
+      "id": 98,
+      "name": "Customer_Stop_9455028220",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9455028220",
+      "lon": 87.279437,
+      "lat": 22.345919,
+      "graph_node": 9455028220,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 46.67,
+      "demand_units": 3,
+      "time_window": [
+        480,
+        570
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 99,
+      "name": "Customer_Stop_9446687315",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446687315",
+      "lon": 87.299014,
+      "lat": 22.343072,
+      "graph_node": 9446687315,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 11.97,
+      "demand_units": 1,
+      "time_window": [
+        374,
+        614
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 100,
+      "name": "Customer_Stop_9454789398",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454789398",
+      "lon": 87.31933,
+      "lat": 22.326611,
+      "graph_node": 9454789398,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 6.38,
+      "demand_units": 5,
+      "time_window": [
+        1132,
+        1252
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 101,
+      "name": "Customer_Stop_9454571321",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9454571321",
+      "lon": 87.28268,
+      "lat": 22.337675,
+      "graph_node": 9454571321,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 7.81,
+      "demand_units": 3,
+      "time_window": [
+        435,
+        555
+      ],
+      "service_time_min": 11
+    },
+    {
+      "id": 102,
+      "name": "Customer_Stop_9447239729",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9447239729",
+      "lon": 87.307847,
+      "lat": 22.354353,
+      "graph_node": 9447239729,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 9.73,
+      "demand_units": 2,
+      "time_window": [
+        367,
+        487
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 103,
+      "name": "Customer_Stop_9452376105",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9452376105",
+      "lon": 87.316728,
+      "lat": 22.356231,
+      "graph_node": 9452376105,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 3,
+      "time_window": [
+        1144,
+        1264
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 104,
+      "name": "Customer_Stop_9461998221",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9461998221",
+      "lon": 87.279688,
+      "lat": 22.344948,
+      "graph_node": 9461998221,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 8.91,
+      "demand_units": 3,
+      "time_window": [
+        524,
+        614
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 105,
+      "name": "Customer_Stop_9446929246",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446929246",
+      "lon": 87.294913,
+      "lat": 22.349957,
+      "graph_node": 9446929246,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 40.88,
+      "demand_units": 1,
+      "time_window": [
+        1071,
+        1161
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 106,
+      "name": "Customer_Stop_9444550662",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9444550662",
+      "lon": 87.289759,
+      "lat": 22.318252,
+      "graph_node": 9444550662,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 8.27,
+      "demand_units": 3,
+      "time_window": [
+        387,
+        477
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 107,
+      "name": "Customer_Stop_9444368284",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9444368284",
+      "lon": 87.290344,
+      "lat": 22.35633,
+      "graph_node": 9444368284,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 44.53,
+      "demand_units": 2,
+      "time_window": [
+        498,
+        558
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 108,
+      "name": "Customer_Stop_9457189800",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9457189800",
+      "lon": 87.305256,
+      "lat": 22.326901,
+      "graph_node": 9457189800,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 26.96,
+      "demand_units": 1,
+      "time_window": [
+        446,
+        626
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 109,
+      "name": "Customer_Stop_9444550676",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9444550676",
+      "lon": 87.28993,
+      "lat": 22.317612,
+      "graph_node": 9444550676,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 16.4,
+      "demand_units": 3,
+      "time_window": [
+        975,
+        1065
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 110,
+      "name": "Customer_Stop_9457204926",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9457204926",
+      "lon": 87.294231,
+      "lat": 22.328295,
+      "graph_node": 9457204926,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 18.24,
+      "demand_units": 4,
+      "time_window": [
+        881,
+        1001
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 111,
+      "name": "Customer_Stop_9461998193",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9461998193",
+      "lon": 87.274166,
+      "lat": 22.350168,
+      "graph_node": 9461998193,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 10.38,
+      "demand_units": 1,
+      "time_window": [
+        731,
+        911
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 112,
+      "name": "Customer_Stop_9451802242",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9451802242",
+      "lon": 87.280619,
+      "lat": 22.318592,
+      "graph_node": 9451802242,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 28.52,
+      "demand_units": 2,
+      "time_window": [
+        548,
+        728
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 113,
+      "name": "Customer_Stop_9452280603",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9452280603",
+      "lon": 87.328209,
+      "lat": 22.35586,
+      "graph_node": 9452280603,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 12.47,
+      "demand_units": 6,
+      "time_window": [
+        437,
+        527
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 114,
+      "name": "Customer_Stop_9457225260",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9457225260",
+      "lon": 87.304211,
+      "lat": 22.327266,
+      "graph_node": 9457225260,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 6.15,
+      "demand_units": 3,
+      "time_window": [
+        838,
+        958
+      ],
+      "service_time_min": 6
+    },
+    {
+      "id": 115,
+      "name": "Customer_Stop_9464947760",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9464947760",
+      "lon": 87.318084,
+      "lat": 22.352032,
+      "graph_node": 9464947760,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 5.86,
+      "demand_units": 1,
+      "time_window": [
+        526,
+        766
+      ],
+      "service_time_min": 3
+    },
+    {
+      "id": 116,
+      "name": "Customer_Stop_9465100147",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465100147",
+      "lon": 87.325258,
+      "lat": 22.347268,
+      "graph_node": 9465100147,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 22.19,
+      "demand_units": 3,
+      "time_window": [
+        856,
+        976
+      ],
+      "service_time_min": 2
+    },
+    {
+      "id": 117,
+      "name": "Customer_Stop_9446893194",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9446893194",
+      "lon": 87.310074,
+      "lat": 22.342361,
+      "graph_node": 9446893194,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 49.52,
+      "demand_units": 1,
+      "time_window": [
+        896,
+        1076
+      ],
+      "service_time_min": 4
+    },
+    {
+      "id": 118,
+      "name": "Customer_Stop_9447288154",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9447288154",
+      "lon": 87.314982,
+      "lat": 22.368149,
+      "graph_node": 9447288154,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 21.93,
+      "demand_units": 3,
+      "time_window": [
+        972,
+        1212
+      ],
+      "service_time_min": 5
+    },
+    {
+      "id": 119,
+      "name": "Customer_Stop_9465252989",
+      "category": "amenity:commercial_stop",
+      "osm_id": "9465252989",
+      "lon": 87.328074,
+      "lat": 22.350354,
+      "graph_node": 9465252989,
+      "snap_distance_deg": 0.0,
+      "demand_kg": 16.98,
+      "demand_units": 1,
+      "time_window": [
+        745,
+        925
+      ],
+      "service_time_min": 3
+    }
+  ]
+}
