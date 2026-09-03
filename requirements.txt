@@ -7,3 +7,4 @@ deap
 matplotlib
 seaborn
 tqdm
+folium

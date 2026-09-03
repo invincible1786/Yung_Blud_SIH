@@ -1,15 +1,34 @@
 import os
+import sys
 import json
 import time
 import pandas as pd
 import numpy as np
 from tqdm import tqdm
 
+# Ensure project root is in sys.path
+sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "../..")))
+
 from src.algorithms.nn_clarke_wright import NearestNeighborClarkeWright
 from src.algorithms.standard_pso import StandardPSO
 from src.algorithms.qpso import QPSO
 from src.algorithms.genetic_algorithm import GeneticAlgorithm
 from src.algorithms.aco_mmas import ACOMMAS
+
+ALGO_KEY_MAP = {
+    "Nearest Neighbor": "nearest_neighbor",
+    "Clarke-Wright": "clarke_wright",
+    "Standard PSO": "standard_pso",
+    "QPSO": "qpso",
+    "Genetic Algorithm": "genetic_algorithm",
+    "Ant Colony (MMAS)": "ant_colony_mmas"
+}
+
+def get_algo_key(algo_name: str) -> str:
+    """Returns canonical slug key for an algorithm name."""
+    if algo_name in ALGO_KEY_MAP:
+        return ALGO_KEY_MAP[algo_name]
+    return algo_name.lower().replace(" ", "_").replace("-", "_").replace("(", "").replace(")", "")
 
 def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
     instances_dir = os.path.join("data", "instances")
@@ -23,6 +42,14 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
 
     raw_results = []
     convergence_histories = {}
+    best_routes = {}
+    best_routes_path = os.path.join(results_dir, "best_routes.json")
+    if os.path.exists(best_routes_path):
+        try:
+            with open(best_routes_path, "r") as f:
+                best_routes = json.load(f)
+        except Exception:
+            best_routes = {}
 
     # Define algorithms to run
     # Format: (algo_name, class_reference, config_dict)
@@ -41,6 +68,9 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
             instance = json.load(f)
 
         instance_id = instance["instance_id"]
+        if instance_id not in best_routes:
+            best_routes[instance_id] = {}
+
         print(f"\n==========================================")
         print(f"BENCHMARKING INSTANCE: {instance_id}")
         print(f"==========================================")
@@ -50,6 +80,7 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
             
             # Constructive heuristics are deterministic, we only need to run once, but we replicate for seed logging simplicity
             is_deterministic = algo_name in ["Nearest Neighbor", "Clarke-Wright"]
+            seed_results = []
             
             for seed in tqdm(range(1, num_seeds + 1), desc=f"{algo_name} seeds"):
                 # Fix seed for reproducibility
@@ -77,6 +108,7 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
                 try:
                     solver = algo_class(instance, config)
                     result = solver.solve()
+                    result.seed = seed
                     
                     # Compute iteration at which the minimum cost was first achieved
                     min_cost = min(result.convergence_history)
@@ -95,10 +127,22 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
                     history_key = f"{instance_id}_{algo_name}_{seed}"
                     convergence_histories[history_key] = [float(c) for c in result.convergence_history]
                     
+                    seed_results.append(result)
+                    
                 except Exception as e:
                     print(f"\nError running {algo_name} on seed {seed}: {e}")
                     import traceback
                     traceback.print_exc()
+
+            # Record best-seed route for this (instance, algorithm) pair
+            if seed_results:
+                best_res = min(seed_results, key=lambda r: r.total_cost)
+                algo_key = get_algo_key(algo_name)
+                best_routes[instance_id][algo_key] = {
+                    "routes": [[int(node) for node in route] for route in best_res.routes],
+                    "cost": round(float(best_res.total_cost), 2),
+                    "seed": int(best_res.seed)
+                }
 
     # Save raw results to CSV
     df_raw = pd.DataFrame(raw_results)
@@ -112,5 +156,11 @@ def run_benchmarks(num_seeds: int = 10, max_iter: int = 100):
         json.dump(convergence_histories, f, indent=4)
     print(f"Saved convergence histories to '{json_path}'.")
 
+    # Save best routes to JSON
+    with open(best_routes_path, "w") as f:
+        json.dump(best_routes, f, indent=4)
+    print(f"Saved best routes to '{best_routes_path}'.")
+
 if __name__ == "__main__":
     run_benchmarks()
+
