@@ -116,6 +116,87 @@ All figures will be saved in `results/plots/` and the final Markdown table will 
 1. **Nearest Neighbor**: Simple greedy constructive heuristic.
 2. **Clarke-Wright Savings**: Classic greedy route-merging heuristic based on savings estimations.
 3. **Standard PSO**: Classic Particle Swarm Optimization using Random-Key mapping (positions in `[0,1]` sorted to derive permutation, split into vehicle routes greedily).
-4. **QPSO**: Quantum-behaved PSO utilizing a delta potential well position update rule for enhanced exploration capabilities. Fits directly into the same random-key decoder for a valid ablation study.
+4. **QPSO (Baseline)**: Quantum-behaved PSO utilizing a delta potential well position update rule for exploration. Fits into the same random-key decoder for baseline comparison.
 5. **Genetic Algorithm**: Permutation representation initialized via DEAP, utilizing Order Crossover (OX1), Swap Mutation, Tournament Selection, and final 2-opt local search route refinement.
 6. **Max-Min Ant System (MMAS)**: Ant Colony Optimization where pheromone values are restricted between dynamically updated bounds $[\tau_{min}, \tau_{max}]$, and only the best ant deposits pheromones.
+7. **QPSO-Optimized**: Production-grade memetic QPSO architecture combining Prins Split dynamic programming, fleet bounding, FFD bin-packing seeding, Lamarckian writeback, and inter-route 2-opt* + intra-route Or-opt local search.
+
+---
+
+## 4. QPSO-Optimized & Optimization Study (`src/qpso_lab/`)
+
+While baseline QPSO used naive greedy tour splitting that inflated route counts, **`QPSOOptimized`** (`src/algorithms/qpso_optimized.py`) establishes a mathematically rigorous solver:
+- **Optimal Route Decoding**: Prins Split algorithm finding the shortest path through an auxiliary DAG in $O(n \cdot B)$ time.
+- **Fleet-Bounded Split**: Multi-layer dynamic programming enforcing exact vehicle limits $K \le K_{max}$.
+- **FFD Seed Particle**: Uses a First-Fit-Decreasing bin-packing seed to guarantee the swarm explores the true minimum vehicle count on every run.
+- **Hybrid Local Search**: Intra-route Or-opt string relocation combined with inter-route 2-opt\* segment exchange.
+- **Lamarckian Write-back**: Inverts improved customer orders back into continuous quantum particle coordinates.
+
+### Verified Benchmark Standing
+- **$N=20$:** **Tied for #1** (58,381.85 m, matches OR-Tools reference optimum).
+- **$N=50$:** **#2** (187,720.08 m, matches minimum fleet of 10 vehicles).
+- **$N=100$:** **#1** (225,422.01 m, 17 vehicles — outperforming ACO MMAS's 248,214.48 m by 22.8 km and sitting within **1.19%** of the OR-Tools MIP reference).
+
+### Running the QPSO Lab Study
+```bash
+# Run 10-seed comparison across all algorithms with unified scoring
+python src/qpso_lab/study.py compare --seeds 10
+
+# Run 6-rung ablation study (V1 Prins -> V6 Inter-route 2-opt*)
+python src/qpso_lab/study.py ablation --seeds 10
+
+# Generate study report and plots
+python src/qpso_lab/study.py report
+
+# Run independent OR-Tools MIP reference
+python src/qpso_lab/study.py reference
+```
+Detailed findings are documented in [`QPSO_OPTIMIZATION_REPORT.md`](file:///c:/Users/Ruhaan%20Kakar/Desktop/Yung_Blud_SIH/QPSO_OPTIMIZATION_REPORT.md).
+
+---
+
+## 5. Route Visualization Suite (`src/visualization/`)
+
+The repository includes a comprehensive visualization suite rendering real road-following routes on OpenStreetMap:
+
+### 1. Static Road Network Maps (OSMnx)
+Renders high-resolution vector PNG maps tracing exact road network geometry:
+```bash
+python src/visualization/static_map.py --instance instance_n20 --algorithm "QPSO-Optimized"
+python src/visualization/static_map.py --instance instance_n50 --algorithm "QPSO-Optimized"
+python src/visualization/static_map.py --instance instance_n100 --algorithm "QPSO-Optimized"
+```
+Outputs: `results/route_maps/static/instance_{n20,n50,n100}_{algo_slug}.png`
+
+### 2. Interactive Folium Maps (HTML / Leaflet)
+Generates interactive, zoomable HTML maps with customer demand markers, depot star, vehicle layer controls, and turn-by-turn route paths:
+```bash
+python src/visualization/interactive_map.py --instance instance_n20 --algorithm "QPSO-Optimized"
+python src/visualization/interactive_map.py --instance instance_n50 --algorithm "QPSO-Optimized"
+python src/visualization/interactive_map.py --instance instance_n100 --algorithm "QPSO-Optimized"
+```
+Outputs: `results/route_maps/interactive/instance_{n20,n50,n100}_{algo_slug}.html`
+
+### 3. Side-by-Side Comparison Grids
+Generates a $2 \times 4$ Matplotlib subplot figure comparing all 7 algorithms under identical road networks, demand colormaps, vehicle legends, and optimality gaps:
+```bash
+# Generate for a single instance
+python src/visualization/comparison_grid.py --instance instance_n50
+
+# Batch generate for all instances (n20, n50, n100)
+python src/visualization/comparison_grid.py --all
+```
+Outputs: `results/route_maps/comparison_grids/comparison_grid_{instance}.png`
+
+---
+
+## 6. Testing & Validation
+
+Run the complete test suite:
+```bash
+# Baseline sanity check (algorithms, visualizers, data pipeline)
+python tests/sanity_check.py
+
+# Comprehensive QPSO-Optimized unit & ablation tests (20 tests)
+python tests/test_qpso_optimized.py
+```

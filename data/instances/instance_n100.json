@@ -1,1557 +1,614 @@
 {
     "instance_id": "instance_n100",
     "depot": {
-        "node_id": 9454571334,
-        "lat": 22.338063,
-        "lon": 87.27914,
-        "name": "Nimpura Post Office",
-        "category": "amenity:post_office",
-        "capacity_kg": 2000.0
+        "node_id": 9461998180,
+        "lat": 24.25132,
+        "lon": 83.26594
     },
     "customers": [
         {
-            "node_id": 9465695815,
-            "demand": 38,
-            "demand_kg": 38.0,
-            "demand_units": 4,
-            "lat": 22.3403333,
-            "lon": 87.3187705,
-            "time_window": [
-                521,
-                701
-            ],
-            "service_time_min": 4,
-            "category": "amenity:fast_food",
-            "name": "Nantu Chowmin Stall"
+            "node_id": 9323353713,
+            "demand": 2,
+            "lat": 22.3436946,
+            "lon": 87.2762663
         },
         {
-            "node_id": 1471100885,
+            "node_id": 9446995626,
+            "demand": 48,
+            "lat": 22.3496864,
+            "lon": 87.3007201
+        },
+        {
+            "node_id": 9447042459,
+            "demand": 15,
+            "lat": 22.3500426,
+            "lon": 87.3140754
+        },
+        {
+            "node_id": 3743556440,
             "demand": 8,
-            "demand_kg": 8.0,
-            "demand_units": 1,
-            "lat": 22.317453,
-            "lon": 87.3099294,
-            "time_window": [
-                816,
-                846
-            ],
-            "service_time_min": 6,
-            "category": "amenity:cafe",
-            "name": "Rao Canteen"
+            "lat": 22.3335553,
+            "lon": 87.3141513
         },
         {
-            "node_id": 9446961347,
-            "demand": 33,
-            "demand_kg": 33.0,
-            "demand_units": 3,
-            "lat": 22.3446014,
-            "lon": 87.293785,
-            "time_window": [
-                832,
-                952
-            ],
-            "service_time_min": 3,
-            "category": "amenity:bank",
-            "name": "Axis Bank"
+            "node_id": 9465240828,
+            "demand": 39,
+            "lat": 22.3480534,
+            "lon": 87.3289288
         },
         {
-            "node_id": 11140840195,
+            "node_id": 9447167156,
+            "demand": 3,
+            "lat": 22.3486051,
+            "lon": 87.306572
+        },
+        {
+            "node_id": 9465035206,
+            "demand": 47,
+            "lat": 22.3480399,
+            "lon": 87.3238466
+        },
+        {
+            "node_id": 9447109726,
             "demand": 21,
-            "demand_kg": 21.0,
-            "demand_units": 4,
-            "lat": 22.3203351,
-            "lon": 87.3061991,
-            "time_window": [
-                721,
-                811
-            ],
-            "service_time_min": 3,
-            "category": "amenity:cafe",
-            "name": "Jayenta Night Canteen"
+            "lat": 22.3480756,
+            "lon": 87.3075125
         },
         {
-            "node_id": 3682898039,
-            "demand": 30,
-            "demand_kg": 30.0,
-            "demand_units": 1,
-            "lat": 22.3404784,
-            "lon": 87.3172798,
-            "time_window": [
-                415,
-                535
-            ],
-            "service_time_min": 7,
-            "category": "shop:gift",
-            "name": "fancy  gift "
+            "node_id": 9452292334,
+            "demand": 3,
+            "lat": 22.3537996,
+            "lon": 87.329717
         },
         {
-            "node_id": 9455028279,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 4,
-            "lat": 22.3468529,
-            "lon": 87.2809965,
-            "time_window": [
-                650,
-                740
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9455028279"
+            "node_id": 9446982835,
+            "demand": 11,
+            "lat": 22.3523643,
+            "lon": 87.2998789
+        },
+        {
+            "node_id": 9447223518,
+            "demand": 7,
+            "lat": 22.3547579,
+            "lon": 87.3059389
         },
         {
             "node_id": 4206978997,
-            "demand": 34,
-            "demand_kg": 34.0,
-            "demand_units": 5,
+            "demand": 37,
             "lat": 22.3439135,
-            "lon": 87.3199609,
-            "time_window": [
-                559,
-                649
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_4206978997"
+            "lon": 87.3199609
         },
         {
-            "node_id": 5297628018,
+            "node_id": 9447000141,
+            "demand": 7,
+            "lat": 22.3493121,
+            "lon": 87.3025625
+        },
+        {
+            "node_id": 9454583139,
             "demand": 16,
-            "demand_kg": 16.0,
-            "demand_units": 3,
-            "lat": 22.3196523,
-            "lon": 87.309464,
-            "time_window": [
-                1106,
-                1286
-            ],
-            "service_time_min": 7,
-            "category": "amenity:library",
-            "name": "Central Library"
+            "lat": 22.3293981,
+            "lon": 87.3275573
         },
         {
-            "node_id": 2613601368,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 2,
-            "lat": 22.317996,
-            "lon": 87.3141759,
-            "time_window": [
-                414,
-                474
-            ],
-            "service_time_min": 5,
-            "category": "office:educational_institution",
-            "name": "Robotics Lab"
+            "node_id": 9446673963,
+            "demand": 48,
+            "lat": 22.3430603,
+            "lon": 87.2979041
         },
         {
-            "node_id": 9444368284,
-            "demand": 45,
-            "demand_kg": 45.0,
-            "demand_units": 2,
-            "lat": 22.3563296,
-            "lon": 87.2903439,
-            "time_window": [
-                498,
-                558
-            ],
-            "service_time_min": 6,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9444368284"
-        },
-        {
-            "node_id": 11140840195,
-            "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 2,
-            "lat": 22.3203351,
-            "lon": 87.3061991,
-            "time_window": [
-                1051,
-                1291
-            ],
-            "service_time_min": 6,
-            "category": "amenity:restaurant",
-            "name": "VS Canteen"
-        },
-        {
-            "node_id": 9454571362,
-            "demand": 23,
-            "demand_kg": 23.0,
-            "demand_units": 2,
-            "lat": 22.3356209,
-            "lon": 87.2830249,
-            "time_window": [
-                786,
-                876
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9454571362"
-        },
-        {
-            "node_id": 1361111333,
-            "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 2,
-            "lat": 22.3224812,
-            "lon": 87.3101957,
-            "time_window": [
-                968,
-                1148
-            ],
-            "service_time_min": 3,
-            "category": "amenity:bank",
-            "name": "State Bank of India"
-        },
-        {
-            "node_id": 9451619239,
-            "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 1,
-            "lat": 22.3166163,
-            "lon": 87.2932695,
-            "time_window": [
-                447,
-                627
-            ],
-            "service_time_min": 4,
-            "category": "amenity:hospital",
-            "name": "Amiyaa Maternity Cum Nursing Home"
-        },
-        {
-            "node_id": 9447183973,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 2,
-            "lat": 22.3545008,
-            "lon": 87.3037951,
-            "time_window": [
-                776,
-                896
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9447183973"
-        },
-        {
-            "node_id": 9462197204,
+            "node_id": 9465253012,
             "demand": 17,
-            "demand_kg": 17.0,
-            "demand_units": 4,
-            "lat": 22.3429871,
-            "lon": 87.2767577,
-            "time_window": [
-                1112,
-                1202
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9462197204"
+            "lat": 22.3515089,
+            "lon": 87.3281172
         },
         {
-            "node_id": 9444550676,
+            "node_id": 9451999798,
+            "demand": 10,
+            "lat": 22.3306844,
+            "lon": 87.27468
+        },
+        {
+            "node_id": 9447003926,
+            "demand": 7,
+            "lat": 22.3390132,
+            "lon": 87.2951319
+        },
+        {
+            "node_id": 5291677810,
+            "demand": 16,
+            "lat": 22.3372382,
+            "lon": 87.2982204
+        },
+        {
+            "node_id": 9455028463,
+            "demand": 35,
+            "lat": 22.3453584,
+            "lon": 87.2900103
+        },
+        {
+            "node_id": 9447156710,
             "demand": 17,
-            "demand_kg": 17.0,
-            "demand_units": 3,
-            "lat": 22.3176115,
-            "lon": 87.2899299,
-            "time_window": [
-                975,
-                1065
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9444550676"
+            "lat": 22.3389028,
+            "lon": 87.3061567
         },
         {
-            "node_id": 12543365684,
-            "demand": 47,
-            "demand_kg": 47.0,
-            "demand_units": 4,
-            "lat": 22.3408641,
-            "lon": 87.3036444,
-            "time_window": [
-                942,
-                1032
-            ],
-            "service_time_min": 6,
-            "category": "amenity:hospital",
-            "name": "TB HOSPITAL"
+            "node_id": 9455148403,
+            "demand": 46,
+            "lat": 22.3176011,
+            "lon": 87.325414
         },
         {
-            "node_id": 9464994755,
-            "demand": 17,
-            "demand_kg": 17.0,
-            "demand_units": 2,
-            "lat": 22.345733,
-            "lon": 87.3168622,
-            "time_window": [
-                400,
-                520
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9464994755"
+            "node_id": 9444510123,
+            "demand": 19,
+            "lat": 22.3182065,
+            "lon": 87.2864025
         },
         {
-            "node_id": 9461998221,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 3,
-            "lat": 22.3449479,
-            "lon": 87.2796882,
-            "time_window": [
-                524,
-                614
-            ],
-            "service_time_min": 6,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9461998221"
+            "node_id": 9454537971,
+            "demand": 24,
+            "lat": 22.3390376,
+            "lon": 87.2900838
         },
         {
-            "node_id": 9455028429,
+            "node_id": 9446989931,
+            "demand": 7,
+            "lat": 22.3486355,
+            "lon": 87.2961816
+        },
+        {
+            "node_id": 9465113527,
             "demand": 41,
-            "demand_kg": 41.0,
-            "demand_units": 4,
-            "lat": 22.3466677,
-            "lon": 87.2876708,
-            "time_window": [
-                717,
-                807
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9455028429"
+            "lat": 22.3453169,
+            "lon": 87.3254674
         },
         {
-            "node_id": 2613601325,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 5,
-            "lat": 22.317002,
-            "lon": 87.2983919,
-            "time_window": [
-                1181,
-                1301
-            ],
-            "service_time_min": 3,
-            "category": "amenity:cafe",
-            "name": "Super Duper"
+            "node_id": 9446961352,
+            "demand": 25,
+            "lat": 22.3457689,
+            "lon": 87.2932863
+        },
+        {
+            "node_id": 9454576404,
+            "demand": 40,
+            "lat": 22.3504454,
+            "lon": 87.276902
+        },
+        {
+            "node_id": 9454789395,
+            "demand": 33,
+            "lat": 22.3260407,
+            "lon": 87.3227161
+        },
+        {
+            "node_id": 9446673998,
+            "demand": 49,
+            "lat": 22.3417762,
+            "lon": 87.3001183
+        },
+        {
+            "node_id": 9454778620,
+            "demand": 17,
+            "lat": 22.3221366,
+            "lon": 87.3217073
+        },
+        {
+            "node_id": 9452173275,
+            "demand": 38,
+            "lat": 22.3293712,
+            "lon": 87.2853433
+        },
+        {
+            "node_id": 9446811993,
+            "demand": 16,
+            "lat": 22.3396894,
+            "lon": 87.3129047
+        },
+        {
+            "node_id": 9455027673,
+            "demand": 30,
+            "lat": 22.3442509,
+            "lon": 87.2853952
+        },
+        {
+            "node_id": 9455172739,
+            "demand": 29,
+            "lat": 22.3164206,
+            "lon": 87.3249552
+        },
+        {
+            "node_id": 9446687720,
+            "demand": 15,
+            "lat": 22.3433518,
+            "lon": 87.298654
         },
         {
             "node_id": 3743556430,
-            "demand": 35,
-            "demand_kg": 35.0,
-            "demand_units": 3,
-            "lat": 22.3324103,
-            "lon": 87.3241738,
-            "time_window": [
-                977,
-                1157
-            ],
-            "service_time_min": 2,
-            "category": "amenity:school",
-            "name": "Sacred Heart High School"
-        },
-        {
-            "node_id": 9451969210,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 1,
-            "lat": 22.3236092,
-            "lon": 87.272371,
-            "time_window": [
-                1067,
-                1187
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9451969210"
-        },
-        {
-            "node_id": 3743556456,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 2,
-            "lat": 22.335584,
-            "lon": 87.3234401,
-            "time_window": [
-                947,
-                1067
-            ],
-            "service_time_min": 4,
-            "category": "amenity:cafe",
-            "name": "Thomas Tea Stall"
-        },
-        {
-            "node_id": 2614487336,
-            "demand": 7,
-            "demand_kg": 7.0,
-            "demand_units": 4,
-            "lat": 22.3173078,
-            "lon": 87.3008856,
-            "time_window": [
-                821,
-                881
-            ],
-            "service_time_min": 6,
-            "category": "amenity:hospital",
-            "name": "Bidhan Chandra Roy Technology Hospital"
-        },
-        {
-            "node_id": 5297589434,
-            "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 1,
-            "lat": 22.3170379,
-            "lon": 87.3071422,
-            "time_window": [
-                477,
-                597
-            ],
-            "service_time_min": 7,
-            "category": "amenity:restaurant",
-            "name": "Sahara"
-        },
-        {
-            "node_id": 9457225260,
-            "demand": 7,
-            "demand_kg": 7.0,
-            "demand_units": 3,
-            "lat": 22.3272656,
-            "lon": 87.3042115,
-            "time_window": [
-                838,
-                958
-            ],
-            "service_time_min": 6,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9457225260"
-        },
-        {
-            "node_id": 9455136485,
-            "demand": 8,
-            "demand_kg": 8.0,
-            "demand_units": 2,
-            "lat": 22.3200089,
-            "lon": 87.3229103,
-            "time_window": [
-                563,
-                683
-            ],
-            "service_time_min": 7,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9455136485"
-        },
-        {
-            "node_id": 9465050525,
-            "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 2,
-            "lat": 22.3513131,
-            "lon": 87.3247188,
-            "time_window": [
-                637,
-                727
-            ],
-            "service_time_min": 8,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9465050525"
-        },
-        {
-            "node_id": 2613601300,
-            "demand": 14,
-            "demand_kg": 14.0,
-            "demand_units": 1,
-            "lat": 22.3192436,
-            "lon": 87.3035389,
-            "time_window": [
-                589,
-                619
-            ],
-            "service_time_min": 8,
-            "category": "amenity:bank",
-            "name": "Axis Bank"
-        },
-        {
-            "node_id": 9452319947,
-            "demand": 41,
-            "demand_kg": 41.0,
-            "demand_units": 1,
-            "lat": 22.3530925,
-            "lon": 87.3260823,
-            "time_window": [
-                763,
-                883
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9452319947"
-        },
-        {
-            "node_id": 2614487336,
-            "demand": 11,
-            "demand_kg": 11.0,
-            "demand_units": 1,
-            "lat": 22.3173078,
-            "lon": 87.3008856,
-            "time_window": [
-                395,
-                485
-            ],
-            "service_time_min": 3,
-            "category": "amenity:pharmacy",
-            "name": "Frank Ross Pharmacy"
-        },
-        {
-            "node_id": 9462006589,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 2,
-            "lat": 22.3444435,
-            "lon": 87.2757915,
-            "time_window": [
-                396,
-                576
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9462006589"
-        },
-        {
-            "node_id": 5297628018,
-            "demand": 12,
-            "demand_kg": 12.0,
-            "demand_units": 3,
-            "lat": 22.3196523,
-            "lon": 87.309464,
-            "time_window": [
-                1033,
-                1213
-            ],
-            "service_time_min": 2,
-            "category": "amenity:college",
-            "name": "Department of Mathematics"
-        },
-        {
-            "node_id": 9457204926,
-            "demand": 19,
-            "demand_kg": 19.0,
-            "demand_units": 4,
-            "lat": 22.328295,
-            "lon": 87.2942307,
-            "time_window": [
-                881,
-                1001
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9457204926"
-        },
-        {
-            "node_id": 5297588210,
-            "demand": 29,
-            "demand_kg": 29.0,
-            "demand_units": 3,
-            "lat": 22.3372076,
-            "lon": 87.3065792,
-            "time_window": [
-                809,
-                899
-            ],
-            "service_time_min": 5,
-            "category": "amenity:marketplace",
-            "name": "Gate Bazaar"
-        },
-        {
-            "node_id": 12651769992,
-            "demand": 11,
-            "demand_kg": 11.0,
-            "demand_units": 2,
-            "lat": 22.3167318,
-            "lon": 87.3216586,
-            "time_window": [
-                603,
-                723
-            ],
-            "service_time_min": 7,
-            "category": "office:educational_institution",
-            "name": "Center for Artificial Intelligence"
-        },
-        {
-            "node_id": 9447288154,
-            "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 3,
-            "lat": 22.3681488,
-            "lon": 87.3149825,
-            "time_window": [
-                972,
-                1212
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9447288154"
-        },
-        {
-            "node_id": 2613601368,
             "demand": 42,
-            "demand_kg": 42.0,
-            "demand_units": 2,
-            "lat": 22.317996,
-            "lon": 87.3141759,
-            "time_window": [
-                589,
-                829
-            ],
-            "service_time_min": 8,
-            "category": "amenity:restaurant",
-            "name": "Kalida's Canteen"
+            "lat": 22.3324103,
+            "lon": 87.3241738
         },
         {
-            "node_id": 9447000167,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 2,
-            "lat": 22.3456924,
-            "lon": 87.3001821,
-            "time_window": [
-                399,
-                519
-            ],
-            "service_time_min": 5,
-            "category": "amenity:clinic",
-            "name": "Mercy Nursing Home"
+            "node_id": 9462145000,
+            "demand": 45,
+            "lat": 22.3489168,
+            "lon": 87.2907537
         },
         {
-            "node_id": 9446866270,
-            "demand": 7,
-            "demand_kg": 7.0,
-            "demand_units": 2,
-            "lat": 22.3413294,
-            "lon": 87.3165571,
-            "time_window": [
-                806,
-                986
-            ],
-            "service_time_min": 8,
-            "category": "shop:confectionery",
-            "name": "sitala  mistanna  bhandar"
-        },
-        {
-            "node_id": 9446961449,
-            "demand": 11,
-            "demand_kg": 11.0,
-            "demand_units": 4,
-            "lat": 22.3492748,
-            "lon": 87.2980824,
-            "time_window": [
-                766,
-                856
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9446961449"
-        },
-        {
-            "node_id": 3599447609,
-            "demand": 20,
-            "demand_kg": 20.0,
-            "demand_units": 1,
-            "lat": 22.3383468,
-            "lon": 87.3254933,
-            "time_window": [
-                742,
-                862
-            ],
-            "service_time_min": 7,
-            "category": "amenity:fuel",
-            "name": "Bharat Petroleum"
-        },
-        {
-            "node_id": 9455028220,
-            "demand": 47,
-            "demand_kg": 47.0,
-            "demand_units": 3,
-            "lat": 22.3459187,
-            "lon": 87.2794367,
-            "time_window": [
-                480,
-                570
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9455028220"
-        },
-        {
-            "node_id": 9455028297,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 1,
-            "lat": 22.3478273,
-            "lon": 87.2785057,
-            "time_window": [
-                582,
-                642
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9455028297"
-        },
-        {
-            "node_id": 9446961345,
-            "demand": 37,
-            "demand_kg": 37.0,
-            "demand_units": 4,
-            "lat": 22.3446153,
-            "lon": 87.2941406,
-            "time_window": [
-                628,
-                748
-            ],
-            "service_time_min": 5,
-            "category": "amenity:bank",
-            "name": "State Bank of India"
-        },
-        {
-            "node_id": 9457200357,
-            "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 5,
-            "lat": 22.3289027,
-            "lon": 87.2958541,
-            "time_window": [
-                761,
-                851
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9457200357"
-        },
-        {
-            "node_id": 9464978612,
-            "demand": 7,
-            "demand_kg": 7.0,
-            "demand_units": 1,
-            "lat": 22.3475395,
-            "lon": 87.3172876,
-            "time_window": [
-                1063,
-                1123
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9464978612"
-        },
-        {
-            "node_id": 9455028465,
-            "demand": 28,
-            "demand_kg": 28.0,
-            "demand_units": 4,
-            "lat": 22.3444479,
-            "lon": 87.2899702,
-            "time_window": [
-                1083,
-                1113
-            ],
-            "service_time_min": 5,
-            "category": "amenity:hospital",
-            "name": "Bimal Arogya Niketan"
-        },
-        {
-            "node_id": 5297589434,
+            "node_id": 9447212792,
             "demand": 41,
-            "demand_kg": 41.0,
-            "demand_units": 4,
-            "lat": 22.3170379,
-            "lon": 87.3071422,
-            "time_window": [
-                553,
-                673
-            ],
-            "service_time_min": 2,
-            "category": "amenity:fast_food",
-            "name": "The New Tikka"
+            "lat": 22.3545887,
+            "lon": 87.30507
         },
         {
-            "node_id": 11268826051,
-            "demand": 5,
-            "demand_kg": 5.0,
-            "demand_units": 2,
-            "lat": 22.3263993,
-            "lon": 87.3149925,
-            "time_window": [
-                974,
-                1214
-            ],
-            "service_time_min": 4,
-            "category": "amenity:hospital",
-            "name": "Quality Health Care Centre"
-        },
-        {
-            "node_id": 11140840194,
-            "demand": 36,
-            "demand_kg": 36.0,
-            "demand_units": 6,
-            "lat": 22.3196366,
-            "lon": 87.306296,
-            "time_window": [
-                390,
-                510
-            ],
-            "service_time_min": 6,
-            "category": "amenity:restaurant",
-            "name": "Heritage"
-        },
-        {
-            "node_id": 9465035680,
-            "demand": 27,
-            "demand_kg": 27.0,
-            "demand_units": 3,
-            "lat": 22.3476799,
-            "lon": 87.3257772,
-            "time_window": [
-                696,
-                876
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9465035680"
-        },
-        {
-            "node_id": 9454859259,
-            "demand": 18,
-            "demand_kg": 18.0,
-            "demand_units": 1,
-            "lat": 22.3288548,
-            "lon": 87.330202,
-            "time_window": [
-                399,
-                579
-            ],
-            "service_time_min": 2,
-            "category": "amenity:clinic",
-            "name": "Sanjeevani Hill Nursing Home"
-        },
-        {
-            "node_id": 9452280603,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 6,
-            "lat": 22.3558599,
-            "lon": 87.3282093,
-            "time_window": [
-                437,
-                527
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9452280603"
-        },
-        {
-            "node_id": 2614507396,
-            "demand": 14,
-            "demand_kg": 14.0,
-            "demand_units": 1,
-            "lat": 22.3166727,
-            "lon": 87.3045784,
-            "time_window": [
-                667,
-                907
-            ],
-            "service_time_min": 2,
-            "category": "amenity:community_centre",
-            "name": "Technology Club"
-        },
-        {
-            "node_id": 3743556459,
-            "demand": 14,
-            "demand_kg": 14.0,
-            "demand_units": 2,
-            "lat": 22.3360852,
-            "lon": 87.3260273,
-            "time_window": [
-                710,
-                890
-            ],
-            "service_time_min": 2,
-            "category": "shop:bakery",
-            "name": "South Institute Bakery"
-        },
-        {
-            "node_id": 9447088153,
-            "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 4,
-            "lat": 22.3450803,
-            "lon": 87.3110188,
-            "time_window": [
-                547,
-                787
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9447088153"
-        },
-        {
-            "node_id": 9452292323,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 1,
-            "lat": 22.3534853,
-            "lon": 87.3293255,
-            "time_window": [
-                856,
-                916
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9452292323"
-        },
-        {
-            "node_id": 9446898990,
-            "demand": 3,
-            "demand_kg": 3.0,
-            "demand_units": 2,
-            "lat": 22.3450759,
-            "lon": 87.3040339,
-            "time_window": [
-                1030,
-                1090
-            ],
-            "service_time_min": 7,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9446898990"
-        },
-        {
-            "node_id": 9465035071,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 1,
-            "lat": 22.3428646,
-            "lon": 87.3167937,
-            "time_window": [
-                1069,
-                1309
-            ],
-            "service_time_min": 5,
-            "category": "amenity:bank",
-            "name": "Allahabad Bank"
-        },
-        {
-            "node_id": 2614507396,
-            "demand": 34,
-            "demand_kg": 34.0,
-            "demand_units": 3,
-            "lat": 22.3166727,
-            "lon": 87.3045784,
-            "time_window": [
-                1003,
-                1093
-            ],
-            "service_time_min": 5,
-            "category": "amenity:restaurant",
-            "name": "Dreamland"
-        },
-        {
-            "node_id": 9454859278,
-            "demand": 19,
-            "demand_kg": 19.0,
-            "demand_units": 1,
-            "lat": 22.3268695,
-            "lon": 87.329847,
-            "time_window": [
-                885,
-                975
-            ],
-            "service_time_min": 8,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9454859278"
-        },
-        {
-            "node_id": 9454789398,
-            "demand": 7,
-            "demand_kg": 7.0,
-            "demand_units": 5,
-            "lat": 22.3266114,
-            "lon": 87.31933,
-            "time_window": [
-                1132,
-                1252
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9454789398"
-        },
-        {
-            "node_id": 2614507396,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 2,
-            "lat": 22.3166727,
-            "lon": 87.3045784,
-            "time_window": [
-                909,
-                1029
-            ],
-            "service_time_min": 9,
-            "category": "amenity:restaurant",
-            "name": "Veggies"
-        },
-        {
-            "node_id": 5297589430,
-            "demand": 9,
-            "demand_kg": 9.0,
-            "demand_units": 1,
-            "lat": 22.3196966,
-            "lon": 87.3086657,
-            "time_window": [
-                1146,
-                1266
-            ],
-            "service_time_min": 6,
-            "category": "shop:kiosk",
-            "name": "Railway Reservation Counter"
-        },
-        {
-            "node_id": 9446961347,
-            "demand": 25,
-            "demand_kg": 25.0,
-            "demand_units": 2,
-            "lat": 22.3446014,
-            "lon": 87.293785,
-            "time_window": [
-                648,
-                738
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9446961347"
-        },
-        {
-            "node_id": 9462170711,
+            "node_id": 9454752649,
             "demand": 22,
-            "demand_kg": 22.0,
-            "demand_units": 2,
-            "lat": 22.3445884,
-            "lon": 87.2933894,
-            "time_window": [
-                483,
-                723
-            ],
-            "service_time_min": 4,
-            "category": "amenity:bank",
-            "name": "IDBI Bank"
+            "lat": 22.3233127,
+            "lon": 87.3177497
         },
         {
-            "node_id": 11140840194,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 2,
-            "lat": 22.3196366,
-            "lon": 87.306296,
-            "time_window": [
-                1036,
-                1276
-            ],
-            "service_time_min": 6,
-            "category": "amenity:cafe",
-            "name": "Cafe Coffee Day"
+            "node_id": 3743556436,
+            "demand": 43,
+            "lat": 22.3328959,
+            "lon": 87.3267463
         },
         {
-            "node_id": 9457173408,
-            "demand": 8,
-            "demand_kg": 8.0,
-            "demand_units": 6,
-            "lat": 22.3253701,
-            "lon": 87.3144784,
-            "time_window": [
-                694,
-                784
-            ],
-            "service_time_min": 6,
-            "category": "amenity:hospital",
-            "name": "Kharagpur Sathi Health Care For Aged"
+            "node_id": 11428595421,
+            "demand": 3,
+            "lat": 22.3252268,
+            "lon": 87.3127727
         },
         {
-            "node_id": 9446893194,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 1,
-            "lat": 22.3423606,
-            "lon": 87.3100743,
-            "time_window": [
-                896,
-                1076
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9446893194"
+            "node_id": 9451613678,
+            "demand": 41,
+            "lat": 22.3697537,
+            "lon": 87.3140175
         },
         {
-            "node_id": 5297589434,
-            "demand": 40,
-            "demand_kg": 40.0,
-            "demand_units": 1,
-            "lat": 22.3170379,
-            "lon": 87.3071422,
-            "time_window": [
-                439,
-                619
-            ],
-            "service_time_min": 4,
-            "category": "amenity:restaurant",
-            "name": "Tikka"
-        },
-        {
-            "node_id": 9444510121,
-            "demand": 26,
-            "demand_kg": 26.0,
-            "demand_units": 3,
-            "lat": 22.3175591,
-            "lon": 87.2869428,
-            "time_window": [
-                1019,
-                1259
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9444510121"
-        },
-        {
-            "node_id": 9461998193,
-            "demand": 11,
-            "demand_kg": 11.0,
-            "demand_units": 1,
-            "lat": 22.3501683,
-            "lon": 87.2741662,
-            "time_window": [
-                731,
-                911
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9461998193"
-        },
-        {
-            "node_id": 9451804447,
-            "demand": 13,
-            "demand_kg": 13.0,
-            "demand_units": 1,
-            "lat": 22.3164147,
-            "lon": 87.2829326,
-            "time_window": [
-                486,
-                606
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9451804447"
-        },
-        {
-            "node_id": 2613601372,
+            "node_id": 9454766616,
             "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 1,
-            "lat": 22.3163921,
-            "lon": 87.3144805,
-            "time_window": [
-                464,
-                494
-            ],
-            "service_time_min": 5,
-            "category": "amenity:bank",
-            "name": "HDFC Bank"
+            "lat": 22.3220832,
+            "lon": 87.3228357
         },
         {
-            "node_id": 2613601372,
-            "demand": 4,
-            "demand_kg": 4.0,
-            "demand_units": 5,
-            "lat": 22.3163921,
-            "lon": 87.3144805,
-            "time_window": [
-                685,
-                865
-            ],
-            "service_time_min": 4,
-            "category": "amenity:fast_food",
-            "name": "Subway"
+            "node_id": 9465125673,
+            "demand": 3,
+            "lat": 22.3429956,
+            "lon": 87.3296749
+        },
+        {
+            "node_id": 9454789331,
+            "demand": 31,
+            "lat": 22.3237037,
+            "lon": 87.3228815
+        },
+        {
+            "node_id": 9462123657,
+            "demand": 19,
+            "lat": 22.3510942,
+            "lon": 87.2862693
+        },
+        {
+            "node_id": 9465177855,
+            "demand": 12,
+            "lat": 22.3451325,
+            "lon": 87.3267444
+        },
+        {
+            "node_id": 9447025015,
+            "demand": 1,
+            "lat": 22.3427895,
+            "lon": 87.3154241
+        },
+        {
+            "node_id": 9446936654,
+            "demand": 43,
+            "lat": 22.3523148,
+            "lon": 87.3024923
+        },
+        {
+            "node_id": 1471040640,
+            "demand": 11,
+            "lat": 22.3198767,
+            "lon": 87.3086512
+        },
+        {
+            "node_id": 9446687301,
+            "demand": 34,
+            "lat": 22.3436249,
+            "lon": 87.2978047
+        },
+        {
+            "node_id": 9454889554,
+            "demand": 8,
+            "lat": 22.3392492,
+            "lon": 87.2900509
+        },
+        {
+            "node_id": 9446949185,
+            "demand": 48,
+            "lat": 22.3471514,
+            "lon": 87.300861
+        },
+        {
+            "node_id": 9447139467,
+            "demand": 46,
+            "lat": 22.3486172,
+            "lon": 87.3137947
+        },
+        {
+            "node_id": 1068901811,
+            "demand": 1,
+            "lat": 22.3438748,
+            "lon": 87.3186184
+        },
+        {
+            "node_id": 9455062901,
+            "demand": 16,
+            "lat": 22.3446745,
+            "lon": 87.277117
+        },
+        {
+            "node_id": 9446995624,
+            "demand": 8,
+            "lat": 22.3482648,
+            "lon": 87.3016335
+        },
+        {
+            "node_id": 9454736658,
+            "demand": 26,
+            "lat": 22.3268269,
+            "lon": 87.3232422
+        },
+        {
+            "node_id": 9447163628,
+            "demand": 47,
+            "lat": 22.3382384,
+            "lon": 87.3075072
+        },
+        {
+            "node_id": 9446936678,
+            "demand": 3,
+            "lat": 22.3512961,
+            "lon": 87.3033674
+        },
+        {
+            "node_id": 9465260243,
+            "demand": 46,
+            "lat": 22.3521275,
+            "lon": 87.3281784
         },
         {
             "node_id": 9454571345,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 3,
+            "demand": 19,
             "lat": 22.3357937,
-            "lon": 87.2782085,
-            "time_window": [
-                955,
-                1045
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9454571345"
+            "lon": 87.2782085
         },
         {
-            "node_id": 2614492894,
-            "demand": 16,
-            "demand_kg": 16.0,
-            "demand_units": 4,
-            "lat": 22.3167536,
-            "lon": 87.3012232,
-            "time_window": [
-                595,
-                775
-            ],
-            "service_time_min": 2,
-            "category": "amenity:restaurant",
-            "name": "Peep\u2019s Kitchen"
+            "node_id": 9447148320,
+            "demand": 32,
+            "lat": 22.3498041,
+            "lon": 87.3109266
         },
         {
-            "node_id": 5297588191,
-            "demand": 28,
-            "demand_kg": 28.0,
-            "demand_units": 2,
-            "lat": 22.3379495,
-            "lon": 87.309448,
-            "time_window": [
-                600,
-                840
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_5297588191"
+            "node_id": 9457200393,
+            "demand": 30,
+            "lat": 22.328692,
+            "lon": 87.2974452
         },
         {
-            "node_id": 9451969216,
-            "demand": 8,
-            "demand_kg": 8.0,
-            "demand_units": 2,
-            "lat": 22.3228781,
-            "lon": 87.2739443,
-            "time_window": [
-                574,
-                754
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9451969216"
-        },
-        {
-            "node_id": 9465100147,
-            "demand": 23,
-            "demand_kg": 23.0,
-            "demand_units": 3,
-            "lat": 22.347268,
-            "lon": 87.3252583,
-            "time_window": [
-                856,
-                976
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9465100147"
-        },
-        {
-            "node_id": 9452043436,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 3,
-            "lat": 22.3306,
-            "lon": 87.2773294,
-            "time_window": [
-                1086,
-                1206
-            ],
-            "service_time_min": 2,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9452043436"
-        },
-        {
-            "node_id": 5297629638,
-            "demand": 5,
-            "demand_kg": 5.0,
-            "demand_units": 4,
-            "lat": 22.319888,
-            "lon": 87.308727,
-            "time_window": [
-                509,
-                689
-            ],
-            "service_time_min": 8,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_5297629638"
-        },
-        {
-            "node_id": 2613601305,
-            "demand": 14,
-            "demand_kg": 14.0,
-            "demand_units": 2,
-            "lat": 22.3208901,
-            "lon": 87.3032667,
-            "time_window": [
-                1115,
-                1235
-            ],
-            "service_time_min": 5,
-            "category": "amenity:cafe",
-            "name": "Astha HJB Canteen"
-        },
-        {
-            "node_id": 5297628018,
-            "demand": 20,
-            "demand_kg": 20.0,
-            "demand_units": 2,
-            "lat": 22.3196523,
-            "lon": 87.309464,
-            "time_window": [
-                361,
-                451
-            ],
-            "service_time_min": 5,
-            "category": "amenity:college",
-            "name": "Department of Humanities and Social Science"
-        },
-        {
-            "node_id": 2614492894,
-            "demand": 14,
-            "demand_kg": 14.0,
-            "demand_units": 1,
-            "lat": 22.3167536,
-            "lon": 87.3012232,
-            "time_window": [
-                703,
-                793
-            ],
-            "service_time_min": 5,
-            "category": "shop:beauty",
-            "name": "Glow In Beauty Parlour"
-        },
-        {
-            "node_id": 9454571321,
-            "demand": 8,
-            "demand_kg": 8.0,
-            "demand_units": 3,
-            "lat": 22.3376751,
-            "lon": 87.2826803,
-            "time_window": [
-                435,
-                555
-            ],
-            "service_time_min": 11,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9454571321"
-        },
-        {
-            "node_id": 5297628018,
-            "demand": 24,
-            "demand_kg": 24.0,
-            "demand_units": 1,
-            "lat": 22.3196523,
-            "lon": 87.309464,
-            "time_window": [
-                496,
-                616
-            ],
-            "service_time_min": 5,
-            "category": "amenity:college",
-            "name": "Department of Electrical Engineering"
-        },
-        {
-            "node_id": 9447000167,
-            "demand": 5,
-            "demand_kg": 5.0,
-            "demand_units": 4,
-            "lat": 22.3456924,
-            "lon": 87.3001821,
-            "time_window": [
-                898,
-                958
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9447000167"
-        },
-        {
-            "node_id": 5287221858,
-            "demand": 18,
-            "demand_kg": 18.0,
-            "demand_units": 1,
-            "lat": 22.3298219,
-            "lon": 87.3111193,
-            "time_window": [
-                641,
-                701
-            ],
-            "service_time_min": 5,
-            "category": "office:educational_institution",
-            "name": "In-Motion Train Driving Simulator (WDG-4)"
-        },
-        {
-            "node_id": 9451802242,
-            "demand": 29,
-            "demand_kg": 29.0,
-            "demand_units": 2,
-            "lat": 22.3185921,
-            "lon": 87.2806194,
-            "time_window": [
-                548,
-                728
-            ],
-            "service_time_min": 5,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9451802242"
-        },
-        {
-            "node_id": 9457375228,
-            "demand": 50,
-            "demand_kg": 50.0,
-            "demand_units": 5,
-            "lat": 22.3272613,
-            "lon": 87.3027813,
-            "time_window": [
-                446,
-                626
-            ],
-            "service_time_min": 7,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9457375228"
-        },
-        {
-            "node_id": 9462206017,
-            "demand": 24,
-            "demand_kg": 24.0,
-            "demand_units": 3,
-            "lat": 22.3500412,
-            "lon": 87.286633,
-            "time_window": [
-                384,
-                504
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9462206017"
-        },
-        {
-            "node_id": 9446929246,
+            "node_id": 9444571120,
             "demand": 41,
-            "demand_kg": 41.0,
-            "demand_units": 1,
-            "lat": 22.3499573,
-            "lon": 87.294913,
-            "time_window": [
-                1071,
-                1161
-            ],
-            "service_time_min": 4,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9446929246"
+            "lat": 22.3197967,
+            "lon": 87.2964301
         },
         {
-            "node_id": 9446683235,
-            "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 2,
-            "lat": 22.3401529,
-            "lon": 87.3058461,
-            "time_window": [
-                951,
-                981
-            ],
-            "service_time_min": 8,
-            "category": "amenity:clinic",
-            "name": "Chakraborty Nursing Home"
+            "node_id": 9457155182,
+            "demand": 26,
+            "lat": 22.3222969,
+            "lon": 87.2968946
+        },
+        {
+            "node_id": 9446687302,
+            "demand": 21,
+            "lat": 22.3436681,
+            "lon": 87.2980617
+        },
+        {
+            "node_id": 9446687296,
+            "demand": 38,
+            "lat": 22.3438489,
+            "lon": 87.2980325
+        },
+        {
+            "node_id": 9454995950,
+            "demand": 31,
+            "lat": 22.3395522,
+            "lon": 87.2769436
+        },
+        {
+            "node_id": 9454766593,
+            "demand": 30,
+            "lat": 22.3216205,
+            "lon": 87.3221691
+        },
+        {
+            "node_id": 9455027679,
+            "demand": 25,
+            "lat": 22.3442669,
+            "lon": 87.2858264
+        },
+        {
+            "node_id": 9447088176,
+            "demand": 50,
+            "lat": 22.3483611,
+            "lon": 87.3123988
+        },
+        {
+            "node_id": 9465226740,
+            "demand": 18,
+            "lat": 22.3473923,
+            "lon": 87.3275527
+        },
+        {
+            "node_id": 13691991404,
+            "demand": 18,
+            "lat": 22.332207,
+            "lon": 87.3158029
+        },
+        {
+            "node_id": 9455028331,
+            "demand": 18,
+            "lat": 22.3482136,
+            "lon": 87.2797787
+        },
+        {
+            "node_id": 9454889794,
+            "demand": 50,
+            "lat": 22.3269493,
+            "lon": 87.3292196
+        },
+        {
+            "node_id": 9464947782,
+            "demand": 7,
+            "lat": 22.346711,
+            "lon": 87.3184481
+        },
+        {
+            "node_id": 9447042494,
+            "demand": 38,
+            "lat": 22.3497515,
+            "lon": 87.3151656
+        },
+        {
+            "node_id": 9451868571,
+            "demand": 42,
+            "lat": 22.3206377,
+            "lon": 87.2769198
+        },
+        {
+            "node_id": 9447000140,
+            "demand": 5,
+            "lat": 22.3483022,
+            "lon": 87.3019751
+        },
+        {
+            "node_id": 9452319937,
+            "demand": 5,
+            "lat": 22.3529027,
+            "lon": 87.3269489
+        },
+        {
+            "node_id": 9465113517,
+            "demand": 1,
+            "lat": 22.3455579,
+            "lon": 87.3266468
+        },
+        {
+            "node_id": 9454586741,
+            "demand": 17,
+            "lat": 22.3352625,
+            "lon": 87.277089
+        },
+        {
+            "node_id": 9451710287,
+            "demand": 19,
+            "lat": 22.3658048,
+            "lon": 87.3113069
+        },
+        {
+            "node_id": 9465119351,
+            "demand": 17,
+            "lat": 22.3418303,
+            "lon": 87.3245891
         },
         {
             "node_id": 9447012627,
-            "demand": 30,
-            "demand_kg": 30.0,
-            "demand_units": 1,
+            "demand": 49,
             "lat": 22.3415555,
-            "lon": 87.3017892,
-            "time_window": [
-                550,
-                790
-            ],
-            "service_time_min": 5,
-            "category": "shop:supermarket",
-            "name": "Big Bazaar"
+            "lon": 87.3017892
         },
         {
-            "node_id": 9464947760,
-            "demand": 6,
-            "demand_kg": 6.0,
-            "demand_units": 1,
-            "lat": 22.352032,
-            "lon": 87.3180841,
-            "time_window": [
-                526,
-                766
-            ],
-            "service_time_min": 3,
-            "category": "amenity:commercial_stop",
-            "name": "Customer_Stop_9464947760"
-        },
-        {
-            "node_id": 9455028441,
+            "node_id": 9447139457,
             "demand": 5,
-            "demand_kg": 5.0,
-            "demand_units": 1,
-            "lat": 22.3445483,
-            "lon": 87.2925916,
-            "time_window": [
-                755,
-                875
-            ],
-            "service_time_min": 8,
-            "category": "amenity:bank",
-            "name": "Andhra Bank"
+            "lat": 22.3488321,
+            "lon": 87.3128482
+        },
+        {
+            "node_id": 9457375324,
+            "demand": 4,
+            "lat": 22.3253688,
+            "lon": 87.2940595
+        },
+        {
+            "node_id": 9465035072,
+            "demand": 30,
+            "lat": 22.3421687,
+            "lon": 87.3169416
+        },
+        {
+            "node_id": 9454752646,
+            "demand": 40,
+            "lat": 22.3236176,
+            "lon": 87.3164283
+        },
+        {
+            "node_id": 9451680086,
+            "demand": 4,
+            "lat": 22.3233277,
+            "lon": 87.2876422
+        },
+        {
+            "node_id": 9452351896,
+            "demand": 2,
+            "lat": 22.3538995,
+            "lon": 87.3245192
+        },
+        {
+            "node_id": 9447012657,
+            "demand": 50,
+            "lat": 22.3456258,
+            "lon": 87.3157749
+        },
+        {
+            "node_id": 9454571411,
+            "demand": 42,
+            "lat": 22.3404706,
+            "lon": 87.28344
+        },
+        {
+            "node_id": 6619195069,
+            "demand": 33,
+            "lat": 22.346551,
+            "lon": 87.3042315
+        },
+        {
+            "node_id": 9464947802,
+            "demand": 25,
+            "lat": 22.3475084,
+            "lon": 87.3196325
+        },
+        {
+            "node_id": 9452280561,
+            "demand": 8,
+            "lat": 22.3553514,
+            "lon": 87.3276081
+        },
+        {
+            "node_id": 9465085810,
+            "demand": 41,
+            "lat": 22.3440756,
+            "lon": 87.3214494
+        },
+        {
+            "node_id": 6430512015,
+            "demand": 50,
+            "lat": 22.3410159,
+            "lon": 87.3150176
         }
     ],
     "vehicle_capacity": 150,
     "num_vehicles": 15,
     "distance_matrix": "ref:data/processed/distance_matrix.npy",
-    "travel_time_matrix": "ref:data/processed/travel_time_matrix.npy",
-    "node_id_map": "ref:data/processed/node_id_map.json",
-    "fleet": [
-        {
-            "type": "two_wheeler",
-            "description": "Motorcycle / Scooter Courier",
-            "capacity_kg": 15,
-            "capacity_units": 5,
-            "cost_per_km_inr": 7.03,
-            "fixed_cost_inr": 150.0,
-            "max_range_km": 40,
-            "speed_factor": 0.88
-        },
-        {
-            "type": "three_wheeler",
-            "description": "Auto-Rickshaw / Commercial Tempo",
-            "capacity_kg": 200,
-            "capacity_units": 30,
-            "cost_per_km_inr": 8.0,
-            "fixed_cost_inr": 300.0,
-            "max_range_km": 60,
-            "speed_factor": 0.82
-        },
-        {
-            "type": "lcv",
-            "description": "Light Commercial Vehicle (Tata Ace / Dost)",
-            "capacity_kg": 750,
-            "capacity_units": 80,
-            "cost_per_km_inr": 7.05,
-            "fixed_cost_inr": 600.0,
-            "max_range_km": 120,
-            "speed_factor": 0.68
-        }
-    ],
-    "cost_weights": {
-        "distance_weight": 1.0,
-        "time_weight": 1.5,
-        "congestion_weight": 0.8,
-        "vehicle_cost_weight": 1.0
-    },
-    "time_aware_weights": "ref:data/processed/time_aware_weights.json"
+    "node_id_map": "ref:data/processed/node_id_map.json"
 }

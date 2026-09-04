@@ -26,6 +26,7 @@ from src.algorithms.standard_pso import StandardPSO
 from src.algorithms.qpso import QPSO
 from src.algorithms.genetic_algorithm import GeneticAlgorithm
 from src.algorithms.aco_mmas import ACOMMAS
+from src.algorithms.qpso_optimized import QPSOOptimized
 from src.benchmark.runner import get_algo_key, ALGO_KEY_MAP
 
 # Graph default search paths
@@ -40,7 +41,8 @@ ALGORITHM_CLASSES = {
     "Standard PSO": (StandardPSO, {"swarm_size": 30, "max_iter": 100, "w": 0.7, "c1": 1.5, "c2": 1.5}),
     "QPSO": (QPSO, {"swarm_size": 30, "max_iter": 100, "beta_start": 1.0, "beta_end": 0.5}),
     "Genetic Algorithm": (GeneticAlgorithm, {"population_size": 30, "max_generations": 100, "crossover_rate": 0.8, "mutation_rate": 0.2, "apply_2opt": True}),
-    "Ant Colony (MMAS)": (ACOMMAS, {"num_ants": 15, "max_iter": 100, "alpha": 1.0, "beta": 3.0, "evaporation_rate": 0.1})
+    "Ant Colony (MMAS)": (ACOMMAS, {"num_ants": 15, "max_iter": 100, "alpha": 1.0, "beta": 3.0, "evaporation_rate": 0.1}),
+    "QPSO-Optimized": (QPSOOptimized, {"swarm_size": 30, "max_iter": 100, "inter_route_2opt_star": True})
 }
 
 
@@ -133,12 +135,34 @@ def load_solution_for_pair(
                 if entry and "routes" in entry:
                     return SolutionResult(
                         routes=entry["routes"],
-                        total_cost=entry.get("cost", 0.0),
+                        total_cost=float(entry.get("cost", entry.get("penalized_cost", entry.get("distance", 0.0)))),
                         convergence_history=[],
                         runtime_seconds=0.0
                     )
         except Exception as e:
             print(f"Warning: Could not read from best_routes.json ({e}). Falling back to re-solve.")
+
+    # 1b. Fallback to results/qpso_study/best_routes.json (e.g. for QPSO-Optimized)
+    qpso_routes_path = os.path.join("results", "qpso_study", "best_routes.json")
+    if os.path.exists(qpso_routes_path):
+        try:
+            with open(qpso_routes_path, "r") as f:
+                qdata = json.load(f)
+            if instance_id in qdata:
+                entry = (
+                    qdata[instance_id].get(algo_slug)
+                    or qdata[instance_id].get(algorithm_name)
+                    or qdata[instance_id].get("qpso_optimized")
+                )
+                if entry and "routes" in entry:
+                    return SolutionResult(
+                        routes=entry["routes"],
+                        total_cost=float(entry.get("cost", entry.get("penalized_cost", entry.get("distance", 0.0)))),
+                        convergence_history=[],
+                        runtime_seconds=0.0
+                    )
+        except Exception as e:
+            print(f"Warning: Could not read from qpso_study best_routes.json ({e}).")
 
     # 2. Re-run best seed using results_raw.csv or seed 1
     raw_csv_path = os.path.join("results", "logs", "results_raw.csv")

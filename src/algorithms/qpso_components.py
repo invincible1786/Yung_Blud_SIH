@@ -379,6 +379,116 @@ def or_opt(
     return routes
 
 
+def two_opt_star(
+    routes: List[List[int]],
+    demands: Dict[int, int],
+    depot_id: int,
+    distance_matrix: np.ndarray,
+    node_id_map: Dict[int, int],
+    vehicle_capacity: float,
+    max_passes: int = 5,
+) -> List[List[int]]:
+    """
+    2-opt* (two-opt star): inter-route edge-exchange local search.
+    Considers pairs of distinct routes (r_A, r_B) and swaps their tails (and
+    optionally inverted tails) to eliminate cross-route path intersections.
+    Strictly capacity-feasible and direction-aware under asymmetric matrices.
+    Can eliminate routes when an entire route's customers are merged into another.
+    """
+    routes = [list(r) for r in routes if len(r) > 2]
+    if len(routes) < 2:
+        return routes
+
+    def cost(r: Sequence[int]) -> float:
+        return route_cost(r, distance_matrix, node_id_map)
+
+    def load(r: Sequence[int]) -> int:
+        return _route_load(r, demands, depot_id)
+
+    passes = 0
+    improved = True
+    while improved and passes < max_passes:
+        improved = False
+        passes += 1
+
+        best_delta = -1e-6
+        best_move = None  # (a_idx, b_idx, new_rA, new_rB)
+
+        num_routes = len(routes)
+        for a_idx in range(num_routes - 1):
+            rA = routes[a_idx]
+            mA = len(rA) - 2  # number of customers
+            if mA < 1:
+                continue
+            costA = cost(rA)
+
+            for b_idx in range(a_idx + 1, num_routes):
+                rB = routes[b_idx]
+                mB = len(rB) - 2
+                if mB < 1:
+                    continue
+                costB = cost(rB)
+                combined_cost_before = costA + costB
+
+                # Try cut points in rA (after node at index i, 0 <= i <= mA)
+                # i=0: head is [depot], tail is customers 1..mA + [depot]
+                # i=mA: head is [depot, c1..cmA], tail is [depot]
+                for i in range(mA + 1):
+                    headA = rA[: i + 1]
+                    tailA = rA[i + 1 :]
+                    load_headA = load(headA)
+                    load_tailA = load(tailA)
+
+                    for j in range(mB + 1):
+                        # Skip trivial no-op moves
+                        if (i == 0 and j == 0) or (i == mA and j == mB):
+                            continue
+
+                        headB = rB[: j + 1]
+                        tailB = rB[j + 1 :]
+                        load_headB = load(headB)
+                        load_tailB = load(tailB)
+
+                        # Option 1: Standard tail swap
+                        # New route A: headA + tailB
+                        # New route B: headB + tailA
+                        if (load_headA + load_tailB <= vehicle_capacity) and (
+                            load_headB + load_tailA <= vehicle_capacity
+                        ):
+                            new_rA = headA + tailB
+                            new_rB = headB + tailA
+                            cand_cost = cost(new_rA) + cost(new_rB)
+                            delta = cand_cost - combined_cost_before
+                            if delta < best_delta:
+                                best_delta = delta
+                                best_move = (a_idx, b_idx, new_rA, new_rB)
+
+                        # Option 2: Tail swap with inverted customer tails
+                        inv_tailB = tailB[:-1][::-1] + [depot_id] if len(tailB) > 1 else tailB
+                        inv_tailA = tailA[:-1][::-1] + [depot_id] if len(tailA) > 1 else tailA
+
+                        if (load_headA + load_tailB <= vehicle_capacity) and (
+                            load_headB + load_tailA <= vehicle_capacity
+                        ):
+                            new_rA_inv = headA + inv_tailB
+                            new_rB_inv = headB + inv_tailA
+                            cand_cost_inv = cost(new_rA_inv) + cost(new_rB_inv)
+                            delta_inv = cand_cost_inv - combined_cost_before
+                            if delta_inv < best_delta:
+                                best_delta = delta_inv
+                                best_move = (a_idx, b_idx, new_rA_inv, new_rB_inv)
+
+        if best_move is not None:
+            a_idx, b_idx, new_rA, new_rB = best_move
+            routes[a_idx] = new_rA
+            routes[b_idx] = new_rB
+            # Drop empty routes (depot -> depot only)
+            routes = [r for r in routes if len(r) > 2]
+            improved = True
+
+    return routes
+
+
 def _break_ties(sorted_vals: np.ndarray) -> np.ndarray:
     """
     Nudges a sorted array so it is strictly increasing, leaving values that

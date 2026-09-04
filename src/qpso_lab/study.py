@@ -136,6 +136,10 @@ ABLATION_VARIANTS: List[Tuple[str, Dict[str, Any]]] = [
         ),
     ),
     ("V5_full_solver", dict()),
+    (
+        "V6_inter_route_2opt_star",
+        dict(inter_route_2opt_star=True),
+    ),
 ]
 
 
@@ -493,6 +497,7 @@ def main() -> None:
     p_abl = sub.add_parser("ablation", help="Run the component ablation ladder")
     p_abl.add_argument("--seeds", type=int, default=10)
     p_abl.add_argument("--max-iter", type=int, default=100)
+    p_abl.add_argument("--instances", nargs="+", default=None, help="Subset of instances (e.g. instance_n50 instance_n100)")
 
     p_ref = sub.add_parser("reference", help="Run the OR-Tools reference solver")
     p_ref.add_argument("--time-limit", type=int, default=30)
@@ -504,7 +509,7 @@ def main() -> None:
     if args.command == "run":
         run_comparison(num_seeds=args.seeds, max_iter=args.max_iter, quick=args.quick)
     elif args.command == "ablation":
-        run_ablation(num_seeds=args.seeds, max_iter=args.max_iter)
+        run_ablation(num_seeds=args.seeds, max_iter=args.max_iter, instances=args.instances)
     elif args.command == "reference":
         run_reference(time_limit_seconds=args.time_limit)
     elif args.command == "report":

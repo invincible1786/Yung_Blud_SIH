@@ -36,20 +36,23 @@ from src.visualization.interactive_map import (
     KHARAGPUR_CENTER,
 )
 
-# Ordered layout so Genetic Algorithm is at bottom-left (row 1, col 0)
+# Ordered 2x4 layout:
+# Row 0: Classical / Heuristic / Baseline (Nearest Neighbor, Clarke-Wright, Standard PSO, QPSO)
+# Row 1: Advanced / Optimized (Genetic Algorithm at bottom-left, Ant Colony MMAS, QPSO-Optimized, Summary Card)
 GRID_ALGORITHMS = [
     ("Nearest Neighbor", "Nearest Neighbor"),
     ("Clarke-Wright", "Clarke-Wright"),
     ("Standard PSO", "Standard PSO"),
-    ("Genetic Algorithm", "Genetic Algorithm"),  # Bottom-Left (row 1, col 0)
     ("QPSO", "QPSO"),
+    ("Genetic Algorithm", "Genetic Algorithm"),  # Bottom-Left (row 1, col 0)
     ("Ant Colony (MMAS)", "Ant Colony (MMAS)"),
+    ("QPSO-Optimized", "QPSO-Optimized"),
 ]
 
 
 def load_optimality_gaps(summary_csv_path: str = os.path.join("results", "logs", "results_summary.csv")) -> Dict[Tuple[str, str], float]:
     """
-    Loads optimality gap percentages from results_summary.csv.
+    Loads optimality gap percentages from results_summary.csv and results/qpso_study/results_summary.csv.
     Returns a dict mapping (instance_id, algorithm_name) -> gap_percent.
     """
     gaps = {}
@@ -61,10 +64,23 @@ def load_optimality_gaps(summary_csv_path: str = os.path.join("results", "logs",
                 algo = str(row["algorithm"]).strip()
                 gap = float(row.get("optimality_gap_percent", 0.0))
                 gaps[(inst, algo)] = gap
-                # Also map slug
                 gaps[(inst, get_algo_key(algo))] = gap
         except Exception as e:
             print(f"Warning: Could not read optimality gaps from {summary_csv_path} ({e})")
+
+    qpso_summary_path = os.path.join("results", "qpso_study", "results_summary.csv")
+    if os.path.exists(qpso_summary_path):
+        try:
+            qdf = pd.read_csv(qpso_summary_path)
+            for _, row in qdf.iterrows():
+                inst = str(row["instance_id"]).strip()
+                algo = str(row["algorithm"]).strip()
+                gap = float(row.get("optimality_gap_percent", 0.0))
+                gaps[(inst, algo)] = gap
+                gaps[(inst, get_algo_key(algo))] = gap
+        except Exception:
+            pass
+
     return gaps
 
 
@@ -127,15 +143,15 @@ def plot_comparison_grid(
     depot_nid = int(instance["depot"]["node_id"])
     depot_lat, depot_lon = get_node_lat_lon(depot_nid, graph, nodes_metadata)
 
-    # Create 2x3 subplot figure
-    fig, axes = plt.subplots(2, 3, figsize=(20, 13.5), facecolor="#ffffff")
-    plt.subplots_adjust(wspace=0.08, hspace=0.18, left=0.03, right=0.92, top=0.91, bottom=0.06)
+    # Create 2x4 subplot figure
+    fig, axes = plt.subplots(2, 4, figsize=(24, 12.5), facecolor="#ffffff")
+    plt.subplots_adjust(wspace=0.08, hspace=0.18, left=0.025, right=0.935, top=0.91, bottom=0.06)
 
     # Global tracking for legend
     max_vehicles_seen = 0
     scatter_handle = None
 
-    # Determine reference cost across the 6 algorithms for gap calculation
+    # Determine reference cost across the algorithms for gap calculation
     solutions = {}
     costs = {}
     for display_name, internal_name in GRID_ALGORITHMS:
@@ -150,8 +166,8 @@ def plot_comparison_grid(
 
     # Render each algorithm in its respective subplot
     for idx, (display_name, internal_name) in enumerate(GRID_ALGORITHMS):
-        row = idx // 3
-        col = idx % 3
+        row = idx // 4
+        col = idx % 4
         ax = axes[row, col]
 
         sol = solutions.get(display_name)
@@ -247,9 +263,37 @@ def plot_comparison_grid(
             pad=8
         )
 
+    # Format the 8th unused subplot (row 1, col 3) with a benchmark summary card
+    ax_blank = axes[1, 3]
+    ax_blank.axis("off")
+    summary_card_text = (
+        f"Benchmark Overview\n"
+        f"────────────────────────\n"
+        f"Instance: {instance_id.upper()}\n"
+        f"Customers: {len(customers)}\n"
+        f"Vehicle Cap: {instance.get('vehicle_capacity', 'N/A')}\n"
+        f"Best Found: {min_instance_cost:,.1f} m\n\n"
+        f"QPSO Enhancements:\n"
+        f"• FFD Fleet Bounding\n"
+        f"• Prins Split Decoding\n"
+        f"• Inter-Route 2-opt*\n"
+        f"• Intra-Route Or-Opt\n"
+        f"• Lamarckian Writeback\n"
+        f"• Elitist Swarm Restarts"
+    )
+    ax_blank.text(
+        0.5, 0.5, summary_card_text,
+        transform=ax_blank.transAxes,
+        ha="center", va="center",
+        fontsize=10,
+        fontfamily="monospace",
+        color="#1e293b",
+        bbox=dict(boxstyle="round,pad=0.9", facecolor="#f8fafc", edgecolor="#cbd5e1", linewidth=1.5)
+    )
+
     # Shared Colorbar for Customer Demand (Right edge)
     if scatter_handle is not None:
-        cbar_ax = fig.add_axes([0.935, 0.22, 0.015, 0.55])
+        cbar_ax = fig.add_axes([0.945, 0.22, 0.012, 0.55])
         cbar = fig.colorbar(scatter_handle, cax=cbar_ax)
         cbar.set_label("Customer Demand (units / kg)", fontsize=11, fontweight="bold", labelpad=8)
         cbar.ax.tick_params(labelsize=9.5)
@@ -272,7 +316,7 @@ def plot_comparison_grid(
     fig.legend(
         handles=legend_handles,
         loc="upper center",
-        bbox_to_anchor=(0.47, 0.965),
+        bbox_to_anchor=(0.48, 0.965),
         ncol=len(legend_handles),
         frameon=True,
         facecolor="#ffffff",

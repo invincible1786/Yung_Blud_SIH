@@ -14,6 +14,7 @@ from src.algorithms.qpso_components import (
     split_fleet_bounded,
     split_optimal,
     two_opt,
+    two_opt_star,
     write_back_keys,
 )
 from src.algorithms.qpso_optimized import QPSOOptimized, _canonical_keys, _ffd_bins
@@ -216,6 +217,64 @@ def test_or_opt_can_eliminate_a_route():
     )
     routes = [[depot_id, 1, depot_id], [depot_id, 2, depot_id]]
     improved = or_opt(routes, demands, depot_id, D, node_id_map, capacity)
+    assert len(improved) == 1
+    visited = [c for r in improved for c in r if c != depot_id]
+    assert sorted(visited) == [1, 2]
+
+
+def test_two_opt_star_preserves_coverage_and_capacity_and_never_worsens():
+    depot_id, customer_ids, demands, capacity, D, node_id_map = _make_synthetic_instance(seed=42, n=6)
+    routes = [[depot_id, 1, 2, 3, depot_id], [depot_id, 4, 5, 6, depot_id]]
+    before = sum(route_cost(r, D, node_id_map) for r in routes)
+    improved = two_opt_star(routes, demands, depot_id, D, node_id_map, capacity)
+    after = sum(route_cost(r, D, node_id_map) for r in improved)
+
+    assert after <= before + 1e-6
+    visited = [c for r in improved for c in r if c != depot_id]
+    assert sorted(visited) == sorted([1, 2, 3, 4, 5, 6])
+    for r in improved:
+        assert r[0] == depot_id and r[-1] == depot_id
+        load = sum(demands[c] for c in r if c != depot_id)
+        assert load <= capacity
+
+
+def test_two_opt_star_cross_improves_synthetic_crossing():
+    depot_id = 0
+    node_id_map = {i: i for i in range(5)}
+    demands = {1: 1, 2: 1, 3: 1, 4: 1}
+    capacity = 10
+    coords = {0: (0.0, 0.0), 1: (0.0, 1.0), 2: (0.0, 2.0), 3: (2.0, 1.0), 4: (2.0, 2.0)}
+    D = np.zeros((5, 5))
+    for i in range(5):
+        for j in range(5):
+            D[i, j] = np.hypot(coords[i][0] - coords[j][0], coords[i][1] - coords[j][1])
+
+    crossing_routes = [[0, 1, 4, 0], [0, 3, 2, 0]]
+    cost_before = sum(route_cost(r, D, node_id_map) for r in crossing_routes)
+
+    improved = two_opt_star(crossing_routes, demands, depot_id, D, node_id_map, capacity)
+    cost_after = sum(route_cost(r, D, node_id_map) for r in improved)
+
+    assert cost_after < cost_before - 1e-3
+    visited = [c for r in improved for c in r if c != depot_id]
+    assert sorted(visited) == [1, 2, 3, 4]
+
+
+def test_two_opt_star_can_eliminate_a_route():
+    depot_id = 0
+    node_id_map = {i: i for i in range(4)}
+    demands = {1: 1, 2: 1}
+    capacity = 10
+    D = np.array(
+        [
+            [0.0, 1.0, 1.0, 0.0],
+            [1.0, 0.0, 0.1, 0.0],
+            [1.0, 0.1, 0.0, 0.0],
+            [0.0, 0.0, 0.0, 0.0],
+        ]
+    )
+    routes = [[depot_id, 1, depot_id], [depot_id, 2, depot_id]]
+    improved = two_opt_star(routes, demands, depot_id, D, node_id_map, capacity)
     assert len(improved) == 1
     visited = [c for r in improved for c in r if c != depot_id]
     assert sorted(visited) == [1, 2]
@@ -501,6 +560,9 @@ def run_all():
         test_two_opt_never_worsens_a_route,
         test_or_opt_preserves_coverage_and_capacity_and_never_worsens,
         test_or_opt_can_eliminate_a_route,
+        test_two_opt_star_preserves_coverage_and_capacity_and_never_worsens,
+        test_two_opt_star_cross_improves_synthetic_crossing,
+        test_two_opt_star_can_eliminate_a_route,
         test_write_back_keys_preserves_multiset_and_reproduces_order,
         test_write_back_keys_handles_duplicate_input_keys,
         test_ffd_seed_reaches_bin_packing_lower_bound_on_real_instances,

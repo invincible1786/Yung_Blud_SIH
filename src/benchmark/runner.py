@@ -21,7 +21,8 @@ ALGO_KEY_MAP = {
     "Standard PSO": "standard_pso",
     "QPSO": "qpso",
     "Genetic Algorithm": "genetic_algorithm",
-    "Ant Colony (MMAS)": "ant_colony_mmas"
+    "Ant Colony (MMAS)": "ant_colony_mmas",
+    "QPSO-Optimized": "qpso_optimized"
 }
 
 def get_algo_key(algo_name: str) -> str:

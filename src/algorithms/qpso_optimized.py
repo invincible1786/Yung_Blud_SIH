@@ -9,6 +9,7 @@ from src.algorithms.qpso_components import (
     split_fleet_bounded,
     split_optimal,
     two_opt,
+    two_opt_star,
     write_back_keys,
 )
 from src.utils.graph_utils import calculate_total_distance, load_instance_resources
@@ -86,6 +87,7 @@ class QPSOOptimized(RoutingAlgorithm):
         self.elitism_restarts = cfg.get("elitism_restarts", True)
         self.bounds_mode = cfg.get("bounds_mode", "reflect")  # "reflect" | "clip"
         self.seed_mode = cfg.get("seed_mode", "ffd")  # "ffd" | "random"
+        self.inter_route_2opt_star = cfg.get("inter_route_2opt_star", False)
 
         # Local search scheduling.
         self.ls_interval = cfg.get("ls_interval", 5)
@@ -174,8 +176,8 @@ class QPSOOptimized(RoutingAlgorithm):
     # ------------------------------------------------------------------
 
     def _educate(self, routes: List[List[int]]) -> Tuple[List[List[int]], List[int]]:
-        """Applies 2-opt + Or-opt to a decoded solution; returns the improved
-        routes and the corresponding flattened customer tour."""
+        """Applies 2-opt + Or-opt (+ optional 2-opt*) to a decoded solution;
+        returns the improved routes and the corresponding flattened customer tour."""
         improved = [two_opt(r, self.distance_matrix, self.node_id_map)[0] for r in routes]
         improved = or_opt(
             improved,
@@ -185,6 +187,16 @@ class QPSOOptimized(RoutingAlgorithm):
             self.node_id_map,
             self.vehicle_capacity,
         )
+        if self.inter_route_2opt_star:
+            improved = two_opt_star(
+                improved,
+                self.demands,
+                self.depot_id,
+                self.distance_matrix,
+                self.node_id_map,
+                self.vehicle_capacity,
+            )
+            improved = [two_opt(r, self.distance_matrix, self.node_id_map)[0] for r in improved]
         improved_tour = [c for r in improved for c in r if c != self.depot_id]
         return improved, improved_tour
 
