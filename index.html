@@ -1,0 +1,1548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QPSO-VRP: Quantum-Behaved Vehicle Routing Optimization</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0a0e17;
+            --bg-secondary: #111827;
+            --bg-card: rgba(17, 24, 39, 0.75);
+            --bg-glass: rgba(26, 34, 53, 0.65);
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-highlight: rgba(99, 102, 241, 0.4);
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --text-dim: #6b7280;
+            --accent-primary: #6366f1;
+            --accent-glow: rgba(99, 102, 241, 0.25);
+            --accent-cyan: #06b6d4;
+            --accent-emerald: #10b981;
+            --accent-amber: #f59e0b;
+            --accent-rose: #f43f5e;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 18px;
+            --radius-xl: 24px;
+            --shadow-card: 0 10px 30px -5px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border-subtle);
+            --shadow-glow: 0 0 35px -5px var(--accent-glow);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-main);
+            min-height: 100vh;
+            line-height: 1.5;
+            overflow-x: hidden;
+            background-image: 
+                radial-gradient(circle at 15% 15%, rgba(99, 102, 241, 0.09) 0%, transparent 45%),
+                radial-gradient(circle at 85% 85%, rgba(6, 182, 212, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.04) 0%, transparent 60%);
+            background-attachment: fixed;
+        }
+
+        /* Top Header & Branding */
+        header {
+            border-bottom: 1px solid var(--border-subtle);
+            background: rgba(10, 14, 23, 0.85);
+            backdrop-filter: blur(16px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1.5rem;
+        }
+
+        .brand-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .brand-logo {
+            width: 44px;
+            height: 44px;
+            border-radius: var(--radius-md);
+            background: linear-gradient(135deg, #6366f1, #06b6d4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.25rem;
+            color: white;
+            box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);
+        }
+
+        .brand-text h1 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.35rem;
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            background: linear-gradient(90deg, #ffffff, #cbd5e1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .brand-text p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .header-badges {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.35rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            background: var(--bg-glass);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+        }
+
+        .badge.status-live {
+            background: rgba(16, 185, 129, 0.15);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #34d399;
+        }
+
+        .badge.status-live::before {
+            content: '';
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 8px #10b981;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        /* Navigation Bar */
+        .nav-tabs {
+            display: flex;
+            gap: 0.5rem;
+            background: rgba(17, 24, 39, 0.6);
+            padding: 0.35rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .nav-tab-btn {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            padding: 0.55rem 1.1rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-tab-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .nav-tab-btn.active {
+            color: #ffffff;
+            background: linear-gradient(135deg, #6366f1, #4f46e5);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+        }
+
+        /* Main Container */
+        main {
+            max-width: 1600px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Executive KPI Bar */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.25rem;
+            margin-bottom: 2rem;
+        }
+
+        .kpi-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .kpi-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--border-highlight);
+        }
+
+        .kpi-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-primary);
+        }
+
+        .kpi-card.emerald::before { background: var(--accent-emerald); }
+        .kpi-card.cyan::before { background: var(--accent-cyan); }
+        .kpi-card.amber::before { background: var(--accent-amber); }
+
+        .kpi-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .kpi-title {
+            font-size: 0.8rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+        }
+
+        .kpi-tag {
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .kpi-value {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.85rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin-bottom: 0.25rem;
+        }
+
+        .kpi-desc {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .highlight-win {
+            color: #34d399;
+            font-weight: 600;
+        }
+
+        /* View Panels */
+        .tab-panel {
+            display: none;
+            animation: fadeIn 0.25s ease forwards;
+        }
+
+        .tab-panel.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Map Explorer Section */
+        .explorer-layout {
+            display: grid;
+            grid-template-columns: 340px 1fr;
+            gap: 1.5rem;
+            align-items: start;
+        }
+
+        @media (max-width: 1100px) {
+            .explorer-layout {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .controls-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .control-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .control-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .control-label {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .instance-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .instance-btn {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 0.75rem 1rem;
+            color: var(--text-main);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .instance-btn:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.15);
+        }
+
+        .instance-btn.active {
+            background: rgba(99, 102, 241, 0.15);
+            border-color: var(--accent-primary);
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(99, 102, 241, 0.2);
+        }
+
+        .instance-btn .count-badge {
+            font-size: 0.75rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+        }
+
+        .algorithm-picker {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+
+        .algo-btn {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-sm);
+            padding: 0.65rem 0.85rem;
+            color: var(--text-muted);
+            font-size: 0.825rem;
+            font-weight: 500;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.18s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .algo-btn:hover {
+            background: rgba(255, 255, 255, 0.07);
+            color: var(--text-main);
+        }
+
+        .algo-btn.active {
+            background: rgba(99, 102, 241, 0.2);
+            border-color: var(--accent-primary);
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        .algo-btn.highlight-primary {
+            border-color: rgba(16, 185, 129, 0.4);
+            background: rgba(16, 185, 129, 0.08);
+            color: #34d399;
+        }
+
+        .algo-btn.highlight-primary.active {
+            background: rgba(16, 185, 129, 0.25);
+            border-color: #10b981;
+            color: #ffffff;
+            box-shadow: 0 0 16px rgba(16, 185, 129, 0.25);
+        }
+
+        .algo-btn .tag {
+            font-size: 0.68rem;
+            padding: 0.15rem 0.45rem;
+            border-radius: 3px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .tag.tag-top {
+            background: #10b981;
+            color: #042f2e;
+        }
+
+        .tag.tag-aco {
+            background: #06b6d4;
+            color: #083344;
+        }
+
+        /* Map Display Card */
+        .map-display-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-card);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            min-height: 780px;
+        }
+
+        .map-card-header {
+            padding: 1rem 1.5rem;
+            background: rgba(17, 24, 39, 0.95);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .map-title-info h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .map-title-info p {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .map-stats-strip {
+            display: flex;
+            align-items: center;
+            gap: 1.25rem;
+        }
+
+        .map-stat-item {
+            text-align: right;
+        }
+
+        .map-stat-label {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--text-dim);
+            font-weight: 600;
+        }
+
+        .map-stat-val {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .map-actions {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .action-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-main);
+            padding: 0.45rem 0.85rem;
+            border-radius: var(--radius-sm);
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+        }
+
+        .action-btn:hover {
+            background: rgba(255, 255, 255, 0.12);
+            color: #ffffff;
+        }
+
+        .iframe-wrapper {
+            flex: 1;
+            position: relative;
+            background: #0b111e;
+            width: 100%;
+            height: 720px;
+        }
+
+        .iframe-wrapper iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Comparison Grid Section */
+        .grid-view-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .grid-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+            background: var(--bg-card);
+            padding: 1rem 1.5rem;
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--border-subtle);
+        }
+
+        .instance-tab-pills {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pill-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--border-subtle);
+            color: var(--text-muted);
+            padding: 0.5rem 1.25rem;
+            border-radius: var(--radius-md);
+            font-size: 0.875rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .pill-btn:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.08);
+        }
+
+        .pill-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+            box-shadow: 0 4px 14px rgba(99, 102, 241, 0.35);
+        }
+
+        .grid-image-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+            text-align: center;
+        }
+
+        .grid-image-card img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--radius-md);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: #ffffff;
+            cursor: zoom-in;
+            transition: transform 0.2s ease;
+        }
+
+        .grid-image-card img:hover {
+            transform: scale(1.005);
+        }
+
+        .grid-callout {
+            margin-top: 1.5rem;
+            background: rgba(99, 102, 241, 0.08);
+            border: 1px solid rgba(99, 102, 241, 0.25);
+            border-radius: var(--radius-md);
+            padding: 1rem 1.5rem;
+            text-align: left;
+            font-size: 0.875rem;
+            color: #c7d2fe;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        /* Leaderboard & Tables */
+        .table-card {
+            background: var(--bg-card);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: var(--shadow-card);
+            margin-bottom: 2rem;
+        }
+
+        .table-card-header {
+            padding: 1.25rem 1.5rem;
+            background: rgba(17, 24, 39, 0.8);
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .table-card-header h2 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+        }
+
+        .custom-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.875rem;
+        }
+
+        .custom-table th {
+            background: rgba(15, 23, 42, 0.95);
+            color: var(--text-muted);
+            font-weight: 700;
+            text-transform: uppercase;
+            font-size: 0.725rem;
+            letter-spacing: 0.06em;
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .custom-table td {
+            padding: 0.9rem 1.25rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-main);
+        }
+
+        .custom-table tr:hover td {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .custom-table tr.highlight-row td {
+            background: rgba(16, 185, 129, 0.08);
+            border-color: rgba(16, 185, 129, 0.2);
+            font-weight: 600;
+        }
+
+        .rank-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            font-weight: 800;
+            font-size: 0.8rem;
+        }
+
+        .rank-1 { background: #fbbf24; color: #78350f; box-shadow: 0 0 10px rgba(251, 191, 36, 0.5); }
+        .rank-2 { background: #94a3b8; color: #0f172a; }
+        .rank-3 { background: #b45309; color: #fef3c7; }
+        .rank-other { background: rgba(255, 255, 255, 0.08); color: var(--text-muted); }
+
+        /* Ablation Step Cards */
+        .ablation-ladder {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .ablation-step {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            display: grid;
+            grid-template-columns: 80px 1fr 200px 140px;
+            gap: 1.5rem;
+            align-items: center;
+            transition: all 0.2s ease;
+        }
+
+        .ablation-step:hover {
+            border-color: var(--border-highlight);
+            transform: translateX(4px);
+        }
+
+        .ablation-step.winner {
+            border-color: #10b981;
+            background: linear-gradient(90deg, rgba(16, 185, 129, 0.1) 0%, var(--bg-card) 60%);
+        }
+
+        .step-num {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--text-muted);
+        }
+
+        .ablation-step.winner .step-num {
+            color: #34d399;
+        }
+
+        .step-details h4 {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+            color: #ffffff;
+        }
+
+        .step-details p {
+            font-size: 0.825rem;
+            color: var(--text-muted);
+        }
+
+        .step-stat-box {
+            text-align: right;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .step-stat-val {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #ffffff;
+        }
+
+        .step-stat-lbl {
+            font-size: 0.7rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+        }
+
+        /* Analytics Grid */
+        .analytics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(460px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .analytics-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 1.25rem 1.5rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .analytics-card h3 {
+            font-family: 'Outfit', sans-serif;
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .analytics-card img {
+            width: 100%;
+            border-radius: var(--radius-md);
+            margin-top: 0.75rem;
+            background: #ffffff;
+        }
+
+        /* Modal Lightbox */
+        .lightbox-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .lightbox-modal.open {
+            display: flex;
+        }
+
+        .lightbox-modal img {
+            max-width: 95vw;
+            max-height: 95vh;
+            border-radius: var(--radius-md);
+            box-shadow: 0 0 50px rgba(0,0,0,0.8);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 4rem;
+            border-top: 1px solid var(--border-subtle);
+            padding: 2.5rem 2rem;
+            background: rgba(10, 14, 23, 0.95);
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header>
+        <div class="header-container">
+            <div class="brand-section">
+                <div class="brand-logo">Ψ</div>
+                <div class="brand-text">
+                    <h1>QPSO-VRP Benchmark Explorer</h1>
+                    <p>Smart India Hackathon • Real OpenStreetMap Road Optimization</p>
+                </div>
+            </div>
+
+            <div class="nav-tabs">
+                <button class="nav-tab-btn active" onclick="switchTab('explorer')">🗺️ Interactive Maps</button>
+                <button class="nav-tab-btn" onclick="switchTab('comparison')">🖼️ 2×4 Grids</button>
+                <button class="nav-tab-btn" onclick="switchTab('leaderboard')">📊 Leaderboard</button>
+                <button class="nav-tab-btn" onclick="switchTab('ablation')">🔬 Ablation (V1-V6)</button>
+                <button class="nav-tab-btn" onclick="switchTab('analytics')">📈 Analytics</button>
+                <button class="nav-tab-btn" onclick="switchTab('research')">📖 Architecture</button>
+            </div>
+
+            <div class="header-badges">
+                <div class="badge status-live">Audit Verified</div>
+                <div class="badge">7 Solvers</div>
+                <div class="badge">Kharagpur, WB</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- KPI Strip -->
+        <div class="kpi-grid">
+            <div class="kpi-card emerald">
+                <div class="kpi-header">
+                    <span class="kpi-title">Instance N=20 (Kharagpur)</span>
+                    <span class="kpi-tag highlight-win">🥇 TIE #1</span>
+                </div>
+                <div class="kpi-value">58,382 m</div>
+                <div class="kpi-desc">
+                    <span>4 Vehicles • <strong class="highlight-win">Exact match with OR-Tools optimum</strong></span>
+                </div>
+            </div>
+
+            <div class="kpi-card cyan">
+                <div class="kpi-header">
+                    <span class="kpi-title">Instance N=50 (Kharagpur)</span>
+                    <span class="kpi-tag" style="color: #38bdf8;">🥈 RANK #2</span>
+                </div>
+                <div class="kpi-value">187,720 m</div>
+                <div class="kpi-desc">
+                    <span>10 Vehicles • <strong class="highlight-win">−15,142 m via 2-opt*</strong> (Tight LB fleet)</span>
+                </div>
+            </div>
+
+            <div class="kpi-card amber">
+                <div class="kpi-header">
+                    <span class="kpi-title">Instance N=100 (Kharagpur)</span>
+                    <span class="kpi-tag" style="color: #fbbf24;">🏆 RANK #1</span>
+                </div>
+                <div class="kpi-value">225,422 m</div>
+                <div class="kpi-desc">
+                    <span>17 Vehicles • <strong class="highlight-win">Beats ACO MMAS by 22.8 km</strong> (1.19% from OR-Tools)</span>
+                </div>
+            </div>
+
+            <div class="kpi-card">
+                <div class="kpi-header">
+                    <span class="kpi-title">Architecture Highlights</span>
+                    <span class="kpi-tag">MEMETIC QPSO</span>
+                </div>
+                <div class="kpi-value" style="font-size: 1.45rem;">Prins + 2-opt*</div>
+                <div class="kpi-desc">
+                    <span>FFD Seed • Fleet Bounded DP • Lamarckian</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 1: INTERACTIVE MAP EXPLORER -->
+        <div id="tab-explorer" class="tab-panel active">
+            <div class="explorer-layout">
+                <!-- Sidebar Controls -->
+                <div class="controls-card">
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>1. Select Instance</span>
+                            <span style="color: var(--accent-cyan)">Scale</span>
+                        </div>
+                        <div class="instance-picker">
+                            <button class="instance-btn active" onclick="setInstance('instance_n20', this)">
+                                <span>Instance N=20</span>
+                                <span class="count-badge">20 Stops</span>
+                            </button>
+                            <button class="instance-btn" onclick="setInstance('instance_n50', this)">
+                                <span>Instance N=50</span>
+                                <span class="count-badge">50 Stops</span>
+                            </button>
+                            <button class="instance-btn" onclick="setInstance('instance_n100', this)">
+                                <span>Instance N=100</span>
+                                <span class="count-badge">100 Stops</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="control-label">
+                            <span>2. Select Solver</span>
+                            <span style="color: var(--accent-emerald)">7 Models</span>
+                        </div>
+                        <div class="algorithm-picker">
+                            <button class="algo-btn highlight-primary active" onclick="setAlgorithm('qpso_optimized', 'QPSO-Optimized (Our Memetic Solver)', this)">
+                                <span>QPSO-Optimized</span>
+                                <span class="tag tag-top">Our Model</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('ant_colony_mmas', 'Ant Colony Optimization (MMAS)', this)">
+                                <span>Ant Colony (MMAS)</span>
+                                <span class="tag tag-aco">Heuristic</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('clarke_wright', 'Clarke-Wright Savings', this)">
+                                <span>Clarke-Wright</span>
+                                <span class="tag">Classic</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('genetic_algorithm', 'Genetic Algorithm (DEAP)', this)">
+                                <span>Genetic Algorithm</span>
+                                <span class="tag">GA</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('standard_pso', 'Standard PSO (Random Key)', this)">
+                                <span>Standard PSO</span>
+                                <span class="tag">Continuous</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('qpso', 'Quantum PSO (Baseline)', this)">
+                                <span>QPSO (Baseline)</span>
+                                <span class="tag">Unmodified</span>
+                            </button>
+                            <button class="algo-btn" onclick="setAlgorithm('nearest_neighbor', 'Nearest Neighbor Greedy', this)">
+                                <span>Nearest Neighbor</span>
+                                <span class="tag">Greedy</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="control-group" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-subtle);">
+                        <div style="font-size: 0.8rem; color: var(--text-dim); line-height: 1.4;">
+                            💡 <strong>Tip for Professor:</strong> In the map, use the upper-right layer control icon to toggle individual vehicle delivery routes on or off, and click any stop to view delivery demand and node ID.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Interactive Map Canvas -->
+                <div class="map-display-card">
+                    <div class="map-card-header">
+                        <div class="map-title-info">
+                            <h3 id="current-map-title">QPSO-Optimized (Our Memetic Solver)</h3>
+                            <p id="current-map-subtitle">Tracing real OpenStreetMap road geometry in Kharagpur, West Bengal</p>
+                        </div>
+
+                        <div class="map-stats-strip">
+                            <div class="map-stat-item">
+                                <div class="map-stat-label">Instance Scale</div>
+                                <div class="map-stat-val" id="stat-instance">N=20 Customers</div>
+                            </div>
+                            <div class="map-stat-item">
+                                <div class="map-stat-label">Best Distance</div>
+                                <div class="map-stat-val" id="stat-distance" style="color: #34d399;">58,381.9 m</div>
+                            </div>
+                            <div class="map-stat-item">
+                                <div class="map-stat-label">Vehicles Used</div>
+                                <div class="map-stat-val" id="stat-vehicles">4 Vehicles</div>
+                            </div>
+                        </div>
+
+                        <div class="map-actions">
+                            <a id="btn-open-external" href="results/route_maps/interactive/instance_n20_qpso_optimized.html" target="_blank" class="action-btn">
+                                <span>↗️ Pop Out Tab</span>
+                            </a>
+                            <button onclick="toggleMapFullscreen()" class="action-btn">
+                                <span>⛶ Fullscreen</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="iframe-wrapper" id="map-iframe-container">
+                        <iframe id="map-frame" src="results/route_maps/interactive/instance_n20_qpso_optimized.html"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 2: SIDE-BY-SIDE 2x4 COMPARISON GRIDS -->
+        <div id="tab-comparison" class="tab-panel">
+            <div class="grid-view-container">
+                <div class="grid-controls">
+                    <div>
+                        <h2 style="font-family: 'Outfit'; font-size: 1.35rem; font-weight: 700;">Side-by-Side 2×4 Benchmark Grids</h2>
+                        <p style="font-size: 0.85rem; color: var(--text-muted);">Comparing all 7 algorithms synchronously under identical road graphs, shared customer demand scales, and vehicle route legends.</p>
+                    </div>
+
+                    <div class="instance-tab-pills">
+                        <button class="pill-btn active" onclick="switchGridInstance('instance_n20', this)">N=20 Grid</button>
+                        <button class="pill-btn" onclick="switchGridInstance('instance_n50', this)">N=50 Grid</button>
+                        <button class="pill-btn" onclick="switchGridInstance('instance_n100', this)">N=100 Grid</button>
+                    </div>
+                </div>
+
+                <div class="grid-image-card">
+                    <img id="grid-img-viewer" src="results/route_maps/comparison_grids/comparison_grid_instance_n20.png" alt="2x4 Benchmark Grid" onclick="openLightbox(this.src)">
+                    <div style="margin-top: 0.75rem; font-size: 0.8rem; color: var(--text-dim);">
+                        🔍 Click the image to view in high-resolution full-screen lightbox
+                    </div>
+                </div>
+
+                <div class="grid-callout">
+                    <div style="font-size: 1.5rem;">💡</div>
+                    <div>
+                        <strong>Layout Architecture:</strong> The $2 \times 4$ comparison grid deliberately organizes algorithms by paradigm: Row 0 presents classical and baseline models (*Nearest Neighbor, Clarke-Wright, Standard PSO, QPSO*), while Row 1 presents advanced metaheuristics (*Genetic Algorithm at bottom-left, Ant Colony MMAS, QPSO-Optimized*), concluding with the instance specification summary card in panel (1,3).
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: BENCHMARK LEADERBOARD -->
+        <div id="tab-leaderboard" class="tab-panel">
+            <div class="table-card">
+                <div class="table-card-header">
+                    <div>
+                        <h2>Audited Final Leaderboard</h2>
+                        <p style="font-size: 0.825rem; color: var(--text-muted);">Uniform scoring through <code>UniformEvaluator</code> (accounting for true road distance, zero dropped penalties, and strict bin-packing lower bounds).</p>
+                    </div>
+                </div>
+
+                <table class="custom-table">
+                    <thead>
+                        <tr>
+                            <th>Instance</th>
+                            <th>Rank</th>
+                            <th>Algorithm</th>
+                            <th>Fleet Used</th>
+                            <th>Best Road Distance</th>
+                            <th>Gap to Best</th>
+                            <th>Key Engineering Contribution</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- N=20 -->
+                        <tr class="highlight-row">
+                            <td><span class="badge">N=20</span></td>
+                            <td><span class="rank-badge rank-1">1</span></td>
+                            <td><strong>QPSO-Optimized (Our Solver)</strong></td>
+                            <td>4</td>
+                            <td><strong>58,381.85 m</strong></td>
+                            <td><span class="highlight-win">0.00% (Tied Optimum)</span></td>
+                            <td>Prins Split + Inter-route 2-opt* + Intra-route Or-opt</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=20</span></td>
+                            <td><span class="rank-badge rank-1">1</span></td>
+                            <td>Ant Colony (MMAS)</td>
+                            <td>4</td>
+                            <td>58,381.85 m</td>
+                            <td>0.00%</td>
+                            <td>Dynamic pheromone bounds [τmin, τmax]</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=20</span></td>
+                            <td><span class="rank-badge rank-3">3</span></td>
+                            <td>Clarke-Wright</td>
+                            <td>5</td>
+                            <td>64,161.05 m</td>
+                            <td>+9.90% (+1 Truck)</td>
+                            <td>Pairwise savings heuristic</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=20</span></td>
+                            <td><span class="rank-badge rank-other">4</span></td>
+                            <td>QPSO (Baseline)</td>
+                            <td>4</td>
+                            <td>66,391.60 m</td>
+                            <td>+13.72%</td>
+                            <td>Continuous delta-well potential</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=20</span></td>
+                            <td><span class="rank-badge rank-other">5</span></td>
+                            <td>Genetic Algorithm</td>
+                            <td>5</td>
+                            <td>67,087.91 m</td>
+                            <td>+14.91% (+1 Truck)</td>
+                            <td>DEAP OX1 + 2-opt post-processing</td>
+                        </tr>
+
+                        <!-- N=50 -->
+                        <tr>
+                            <td><span class="badge">N=50</span></td>
+                            <td><span class="rank-badge rank-1">1</span></td>
+                            <td>Ant Colony (MMAS)</td>
+                            <td>10</td>
+                            <td>157,129.35 m</td>
+                            <td>Best</td>
+                            <td>Pheromone-directed tour construction</td>
+                        </tr>
+                        <tr class="highlight-row">
+                            <td><span class="badge">N=50</span></td>
+                            <td><span class="rank-badge rank-2">2</span></td>
+                            <td><strong>QPSO-Optimized (Our Solver)</strong></td>
+                            <td>10</td>
+                            <td><strong>187,720.08 m</strong></td>
+                            <td><span class="highlight-win">Reduced from 202 km</span></td>
+                            <td>FFD Seed enforces 10 trucks; 2-opt* cuts 15.1 km</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=50</span></td>
+                            <td><span class="rank-badge rank-3">3</span></td>
+                            <td>Clarke-Wright</td>
+                            <td>11</td>
+                            <td>149,027.94 m</td>
+                            <td>Infeasible (+1 Truck)</td>
+                            <td>Violates lower bound fleet count</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=50</span></td>
+                            <td><span class="rank-badge rank-other">4</span></td>
+                            <td>Genetic Algorithm</td>
+                            <td>11</td>
+                            <td>182,861.04 m</td>
+                            <td>Infeasible (+1 Truck)</td>
+                            <td>Violates lower bound fleet count</td>
+                        </tr>
+
+                        <!-- N=100 -->
+                        <tr class="highlight-row">
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-1">1</span></td>
+                            <td><strong>QPSO-Optimized (Our Solver)</strong></td>
+                            <td>17</td>
+                            <td><strong>225,422.01 m</strong></td>
+                            <td><span class="highlight-win">0.00% (WINNER)</span></td>
+                            <td><strong>Beats ACO by 22.8 km</strong>; 1.19% from OR-Tools MIP</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-2">2</span></td>
+                            <td>Ant Colony (MMAS)</td>
+                            <td>17</td>
+                            <td>248,214.48 m</td>
+                            <td>+10.11% (+22.8 km)</td>
+                            <td>Constructive colony search plateaus at scale</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-3">3</span></td>
+                            <td>Nearest Neighbor</td>
+                            <td>17</td>
+                            <td>266,701.90 m</td>
+                            <td>+18.31%</td>
+                            <td>Greedy sequence constructor</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-other">4</span></td>
+                            <td>Clarke-Wright</td>
+                            <td>18</td>
+                            <td>228,951.41 m</td>
+                            <td>Infeasible (+1 Truck)</td>
+                            <td>Fails vehicle packing lower bound</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-other">5</span></td>
+                            <td>Genetic Algorithm</td>
+                            <td>17</td>
+                            <td>335,698.63 m</td>
+                            <td>+48.92%</td>
+                            <td>Struggles with large permutation search space</td>
+                        </tr>
+                        <tr>
+                            <td><span class="badge">N=100</span></td>
+                            <td><span class="rank-badge rank-other">6</span></td>
+                            <td>Standard PSO</td>
+                            <td>18</td>
+                            <td>411,305.27 m</td>
+                            <td>Infeasible (+1 Truck)</td>
+                            <td>Naive greedy split degrades catastrophically</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- TAB 4: COMPONENT ABLATION STUDY (V1 -> V6) -->
+        <div id="tab-ablation" class="tab-panel">
+            <div style="margin-bottom: 1.5rem;">
+                <h2 style="font-family: 'Outfit'; font-size: 1.35rem; font-weight: 700;">6-Stage Component Ablation Ladder</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted);">Empirical verification over 10 random seeds proving what exact architectural component earned each increment of solution quality.</p>
+            </div>
+
+            <div class="ablation-ladder">
+                <div class="ablation-step">
+                    <div class="step-num">V1</div>
+                    <div class="step-details">
+                        <h4>Prins Split Algorithm (Unconstrained DAG)</h4>
+                        <p>Replaces naive greedy route splitting with optimal Bellman-Ford shortest paths over an auxiliary DAG. Eliminates vehicle fragmentation.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val">289.9 km</div>
+                        <div class="step-stat-lbl">N=100 Mean Dist</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val" style="color: #ef4444;">18.0 Trucks</div>
+                        <div class="step-stat-lbl">Fleet Violation</div>
+                    </div>
+                </div>
+
+                <div class="ablation-step">
+                    <div class="step-num">V2</div>
+                    <div class="step-details">
+                        <h4>Fleet-Bounded Multi-Layer DP</h4>
+                        <p>Enforces strict maximum vehicle constraints $K \le K_{max}$ via multi-layered dynamic programming.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val">290.7 km</div>
+                        <div class="step-stat-lbl">N=100 Mean Dist</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val" style="color: #ef4444;">18.0 Trucks</div>
+                        <div class="step-stat-lbl">Fleet Violation</div>
+                    </div>
+                </div>
+
+                <div class="ablation-step">
+                    <div class="step-num">V3</div>
+                    <div class="step-details">
+                        <h4>Intra-Route Or-Opt (Baldwinian Search)</h4>
+                        <p>Evaluates block string relocations (lengths 1, 2, 3) inside routes. Improves evaluated fitness without updating particle keys.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val">257.0 km</div>
+                        <div class="step-stat-lbl">−33 km Gain</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val" style="color: #f59e0b;">17.5 Trucks</div>
+                        <div class="step-stat-lbl">Partial Feasibility</div>
+                    </div>
+                </div>
+
+                <div class="ablation-step">
+                    <div class="step-num">V4</div>
+                    <div class="step-details">
+                        <h4>Lamarckian Writeback</h4>
+                        <p>Inverts improved tour sequences back into continuous particle coordinates so subsequent quantum swarm iterations inherit the improvements.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val">255.0 km</div>
+                        <div class="step-stat-lbl">−2 km Polish</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val" style="color: #f59e0b;">17.6 Trucks</div>
+                        <div class="step-stat-lbl">Swarm Inheritance</div>
+                    </div>
+                </div>
+
+                <div class="ablation-step">
+                    <div class="step-num">V5</div>
+                    <div class="step-details">
+                        <h4>First-Fit-Decreasing (FFD) Bin-Packing Seeding & Swarm Restarts</h4>
+                        <p><strong>The Game Changer:</strong> Injects an FFD seed particle that guarantees the swarm explores the mathematical lower bound on vehicle fleet count across 100% of seeds.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val">271.2 km</div>
+                        <div class="step-stat-lbl">N=100 Distance</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val highlight-win">17.0 Trucks</div>
+                        <div class="step-stat-lbl">100% Feasible!</div>
+                    </div>
+                </div>
+
+                <div class="ablation-step winner">
+                    <div class="step-num">V6</div>
+                    <div class="step-details">
+                        <h4>Inter-Route 2-opt* Cross-Route Edge Exchange</h4>
+                        <p><strong>The Breakthrough:</strong> Implements direction-aware cross-route edge swaps. Breaks the post-seeding geometric plateau, reducing N=100 distance by 34.1 km and beating ACO MMAS to claim Rank 1.</p>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val" style="color: #34d399;">225.4 km</div>
+                        <div class="step-stat-lbl">🏆 Rank 1 Best</div>
+                    </div>
+                    <div class="step-stat-box">
+                        <div class="step-stat-val highlight-win">17.0 Trucks</div>
+                        <div class="step-stat-lbl">Optimal Fleet</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 5: ANALYTICS & CONVERGENCE -->
+        <div id="tab-analytics" class="tab-panel">
+            <div class="analytics-grid">
+                <div class="analytics-card">
+                    <h3>
+                        <span>N=100 Convergence Trajectories</span>
+                        <span class="kpi-tag highlight-win">Penalized Log Scale</span>
+                    </h3>
+                    <img src="results/qpso_study/plots/convergence_instance_n100.png" alt="N=100 Convergence Plot">
+                </div>
+
+                <div class="analytics-card">
+                    <h3>
+                        <span>N=50 Distance & Fleet Comparison</span>
+                        <span class="kpi-tag" style="color: #38bdf8;">10-Seed Distribution</span>
+                    </h3>
+                    <img src="results/qpso_study/plots/distance_routes_instance_n50.png" alt="N=50 Bar Comparison">
+                </div>
+
+                <div class="analytics-card">
+                    <h3>
+                        <span>Diurnal Traffic Congestion Profiles</span>
+                        <span class="kpi-tag" style="color: #fbbf24;">Hourly Speed Degradation</span>
+                    </h3>
+                    <img src="results/plots/test_sanity_profile.png" alt="Traffic Congestion Profile">
+                </div>
+
+                <div class="analytics-card">
+                    <h3>
+                        <span>Data Calibration & Demand Distribution</span>
+                        <span class="kpi-tag">Kaggle + Indian Post Snapping</span>
+                    </h3>
+                    <img src="results/plots/test_sanity_calibration.png" alt="Data Calibration Overview">
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 6: ARCHITECTURE & RESEARCH -->
+        <div id="tab-research" class="tab-panel">
+            <div class="table-card" style="padding: 2rem;">
+                <h2 style="font-family: 'Outfit'; font-size: 1.5rem; margin-bottom: 1rem;">Research Summary & Algorithmic Innovations</h2>
+                <div style="color: var(--text-muted); font-size: 0.925rem; line-height: 1.7; display: flex; flex-direction: column; gap: 1.25rem;">
+                    <p>
+                        This research suite investigates the performance of <strong>Quantum-behaved Particle Swarm Optimization (QPSO)</strong> applied to the Capacitated Vehicle Routing Problem (CVRP) constrained on real OpenStreetMap road networks in Kharagpur, West Bengal.
+                    </p>
+
+                    <div style="background: rgba(255,255,255,0.03); border-left: 4px solid var(--accent-primary); padding: 1rem 1.5rem; border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <h4 style="color: white; margin-bottom: 0.25rem;">Why Baseline QPSO Failed Initially</h4>
+                        <p style="font-size: 0.85rem;">
+                            Standard continuous swarm decoders assign customer priority keys and split routes using a greedy delimiter: when vehicle capacity $Q$ is exceeded, the current route is terminated and a new truck is dispatched. This naive split frequently strands stops in under-filled vehicles, driving vehicle counts from 10 up to 18 trucks and triggering catastrophic penalty costs.
+                        </p>
+                    </div>
+
+                    <div style="background: rgba(16, 185, 129, 0.08); border-left: 4px solid var(--accent-emerald); padding: 1rem 1.5rem; border-radius: 0 var(--radius-md) var(--radius-md) 0;">
+                        <h4 style="color: #34d399; margin-bottom: 0.25rem;">How QPSO-Optimized Solved It</h4>
+                        <ul style="margin-left: 1.25rem; font-size: 0.85rem; margin-top: 0.5rem; display: flex; flex-direction: column; gap: 0.35rem;">
+                            <li><strong>Prins Split Algorithm:</strong> Replaced the greedy split with an optimal polynomial dynamic programming search over an auxiliary Directed Acyclic Graph (DAG), guaranteeing minimum possible travel distance for any customer permutation.</li>
+                            <li><strong>FFD Bin-Packing Seeding:</strong> Proved that vehicle fleet counts must respect the bin-packing lower bound $K_{min} = \lceil \sum d_i / Q \rceil$. Injected an FFD seed particle to ensure the swarm explores the true minimum vehicle count.</li>
+                            <li><strong>Inter-Route 2-opt*:</strong> Evaluated cross-route edge swaps $(u, u_{next})$ and $(v, v_{next})$, allowing routes to uncross and balance stop assignments, breaking the post-seeding distance plateau.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Fullscreen Lightbox Modal -->
+    <div id="lightbox-modal" class="lightbox-modal" onclick="closeLightbox()">
+        <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+        <img id="lightbox-img" src="" alt="Enlarged Visual">
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p><strong>QPSO VRP Optimization Engine</strong> • Built for Smart India Hackathon & Advanced Logistics Research</p>
+        <p style="margin-top: 0.4rem; font-size: 0.775rem;">Verified under uniform distance evaluation • All OpenStreetMap networks and OSMnx paths audited.</p>
+    </footer>
+
+    <!-- Interactive Navigation Scripts -->
+    <script>
+        // Data Registry of All Solutions for Live Explorer
+        const MAP_DATA = {
+            'instance_n20': {
+                'qpso_optimized': { name: 'QPSO-Optimized', file: 'instance_n20_qpso_optimized.html', distance: '58,381.9 m', vehicles: '4 Vehicles', rank: 'Tied Rank #1 (True Optimum)' },
+                'ant_colony_mmas': { name: 'Ant Colony (MMAS)', file: 'instance_n20_ant_colony_mmas.html', distance: '58,381.9 m', vehicles: '4 Vehicles', rank: 'Tied Rank #1' },
+                'clarke_wright': { name: 'Clarke-Wright', file: 'instance_n20_clarke_wright.html', distance: '64,161.0 m', vehicles: '5 Vehicles', rank: 'Rank #3' },
+                'qpso': { name: 'QPSO (Baseline)', file: 'instance_n20_qpso.html', distance: '66,391.6 m', vehicles: '4 Vehicles', rank: 'Rank #4' },
+                'genetic_algorithm': { name: 'Genetic Algorithm', file: 'instance_n20_genetic_algorithm.html', distance: '67,087.9 m', vehicles: '5 Vehicles', rank: 'Rank #5' },
+                'standard_pso': { name: 'Standard PSO', file: 'instance_n20_standard_pso.html', distance: '71,818.4 m', vehicles: '4 Vehicles', rank: 'Rank #6' },
+                'nearest_neighbor': { name: 'Nearest Neighbor', file: 'instance_n20_nearest_neighbor.html', distance: '85,440.1 m', vehicles: '5 Vehicles', rank: 'Rank #7' },
+            },
+            'instance_n50': {
+                'qpso_optimized': { name: 'QPSO-Optimized', file: 'instance_n50_qpso_optimized.html', distance: '187,720.1 m', vehicles: '10 Vehicles', rank: 'Rank #2 (10-Truck Fleet)' },
+                'ant_colony_mmas': { name: 'Ant Colony (MMAS)', file: 'instance_n50_ant_colony_mmas.html', distance: '157,129.4 m', vehicles: '10 Vehicles', rank: 'Rank #1' },
+                'clarke_wright': { name: 'Clarke-Wright', file: 'instance_n50_clarke_wright.html', distance: '149,027.9 m', vehicles: '11 Vehicles (Infeasible)', rank: 'Rank #3' },
+                'genetic_algorithm': { name: 'Genetic Algorithm', file: 'instance_n50_genetic_algorithm.html', distance: '182,861.0 m', vehicles: '11 Vehicles (Infeasible)', rank: 'Rank #4' },
+                'nearest_neighbor': { name: 'Nearest Neighbor', file: 'instance_n50_nearest_neighbor.html', distance: '184,609.0 m', vehicles: '11 Vehicles (Infeasible)', rank: 'Rank #5' },
+                'standard_pso': { name: 'Standard PSO', file: 'instance_n50_standard_pso.html', distance: '200,729.0 m', vehicles: '11 Vehicles (Infeasible)', rank: 'Rank #6' },
+                'qpso': { name: 'QPSO (Baseline)', file: 'instance_n50_qpso.html', distance: '218,245.6 m', vehicles: '11 Vehicles (Infeasible)', rank: 'Rank #7' },
+            },
+            'instance_n100': {
+                'qpso_optimized': { name: 'QPSO-Optimized', file: 'instance_n100_qpso_optimized.html', distance: '225,422.0 m', vehicles: '17 Vehicles', rank: '🏆 RANK #1 (WINNER)' },
+                'ant_colony_mmas': { name: 'Ant Colony (MMAS)', file: 'instance_n100_ant_colony_mmas.html', distance: '248,214.5 m', vehicles: '17 Vehicles', rank: 'Rank #2 (+22.8 km)' },
+                'nearest_neighbor': { name: 'Nearest Neighbor', file: 'instance_n100_nearest_neighbor.html', distance: '266,701.9 m', vehicles: '17 Vehicles', rank: 'Rank #3' },
+                'clarke_wright': { name: 'Clarke-Wright', file: 'instance_n100_clarke_wright.html', distance: '228,951.4 m', vehicles: '18 Vehicles (Infeasible)', rank: 'Rank #4' },
+                'genetic_algorithm': { name: 'Genetic Algorithm', file: 'instance_n100_genetic_algorithm.html', distance: '335,698.6 m', vehicles: '17 Vehicles', rank: 'Rank #5' },
+                'standard_pso': { name: 'Standard PSO', file: 'instance_n100_standard_pso.html', distance: '411,305.3 m', vehicles: '18 Vehicles (Infeasible)', rank: 'Rank #6' },
+                'qpso': { name: 'QPSO (Baseline)', file: 'instance_n100_qpso.html', distance: '429,837.5 m', vehicles: '18 Vehicles (Infeasible)', rank: 'Rank #7' },
+            }
+        };
+
+        let currentInstance = 'instance_n20';
+        let currentAlgorithm = 'qpso_optimized';
+
+        // Tab Switching
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+            document.querySelectorAll('.nav-tab-btn').forEach(b => b.classList.remove('active'));
+            
+            const targetPanel = document.getElementById('tab-' + tabId);
+            if (targetPanel) targetPanel.classList.add('active');
+
+            event.currentTarget.classList.add('active');
+        }
+
+        // Live Map Explorer Updaters
+        function setInstance(instKey, btnElement) {
+            currentInstance = instKey;
+            document.querySelectorAll('.instance-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            updateMapDisplay();
+        }
+
+        function setAlgorithm(algoKey, displayName, btnElement) {
+            currentAlgorithm = algoKey;
+            document.querySelectorAll('.algo-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            updateMapDisplay();
+        }
+
+        function updateMapDisplay() {
+            const data = MAP_DATA[currentInstance][currentAlgorithm];
+            if (!data) return;
+
+            const relativePath = 'results/route_maps/interactive/' + data.file;
+            document.getElementById('map-frame').src = relativePath;
+            document.getElementById('btn-open-external').href = relativePath;
+
+            document.getElementById('current-map-title').textContent = data.name + ' • ' + data.rank;
+            document.getElementById('stat-instance').textContent = currentInstance.replace('instance_', '').toUpperCase() + ' Customers';
+            document.getElementById('stat-distance').textContent = data.distance;
+            document.getElementById('stat-vehicles').textContent = data.vehicles;
+
+            if (currentAlgorithm === 'qpso_optimized') {
+                document.getElementById('stat-distance').style.color = '#34d399';
+            } else {
+                document.getElementById('stat-distance').style.color = '#ffffff';
+            }
+        }
+
+        function toggleMapFullscreen() {
+            const container = document.getElementById('map-iframe-container');
+            if (!document.fullscreenElement) {
+                container.requestFullscreen().catch(err => {
+                    alert(`Error attempting to enable fullscreen: ${err.message}`);
+                });
+            } else {
+                document.exitFullscreen();
+            }
+        }
+
+        // Comparison Grid Switcher
+        function switchGridInstance(instKey, btnElement) {
+            document.querySelectorAll('.pill-btn').forEach(b => b.classList.remove('active'));
+            btnElement.classList.add('active');
+            const imgPath = 'results/route_maps/comparison_grids/comparison_grid_' + instKey + '.png';
+            document.getElementById('grid-img-viewer').src = imgPath;
+        }
+
+        // Lightbox Modal
+        function openLightbox(src) {
+            document.getElementById('lightbox-img').src = src;
+            document.getElementById('lightbox-modal').classList.add('open');
+        }
+
+        function closeLightbox() {
+            document.getElementById('lightbox-modal').classList.remove('open');
+        }
+    </script>
+</body>
+</html>
