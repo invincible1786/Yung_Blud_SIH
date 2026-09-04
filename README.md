@@ -55,7 +55,19 @@ SIH/
 
 ---
 
-## 2. Installation & Quickstart
+## 2. Viewing the Results Dashboard
+
+All benchmark results, live Folium maps, 2×4 comparison grids, and ablation tables are compiled into a single presentation-ready dashboard:
+
+```bash
+python -m http.server 8000
+```
+
+Then open `http://localhost:8000/index.html` in any web browser. The dashboard requires the `results/` directory populated (already committed and verified — no need to re-run the pipeline to view it).
+
+---
+
+## 3. Installation & Quickstart
 
 ### Prerequisites
 Make sure Python 3.10+ is installed on your system.
@@ -111,7 +123,7 @@ All figures will be saved in `results/plots/` and the final Markdown table will 
 
 ---
 
-## 3. Implemented Algorithms
+## 4. Implemented Algorithms
 
 1. **Nearest Neighbor**: Simple greedy constructive heuristic.
 2. **Clarke-Wright Savings**: Classic greedy route-merging heuristic based on savings estimations.
@@ -123,7 +135,7 @@ All figures will be saved in `results/plots/` and the final Markdown table will 
 
 ---
 
-## 4. QPSO-Optimized & Optimization Study (`src/qpso_lab/`)
+## 5. QPSO-Optimized & Optimization Study (`src/qpso_lab/`)
 
 While baseline QPSO used naive greedy tour splitting that inflated route counts, **`QPSOOptimized`** (`src/algorithms/qpso_optimized.py`) establishes a mathematically rigorous solver:
 - **Optimal Route Decoding**: Prins Split algorithm finding the shortest path through an auxiliary DAG in $O(n \cdot B)$ time.
@@ -155,7 +167,7 @@ Detailed findings are documented in [`QPSO_OPTIMIZATION_REPORT.md`](file:///c:/U
 
 ---
 
-## 5. Route Visualization Suite (`src/visualization/`)
+## 6. Route Visualization Suite (`src/visualization/`)
 
 The repository includes a comprehensive visualization suite rendering real road-following routes on OpenStreetMap:
 
@@ -190,7 +202,7 @@ Outputs: `results/route_maps/comparison_grids/comparison_grid_{instance}.png`
 
 ---
 
-## 6. Testing & Validation
+## 7. Testing & Validation
 
 Run the complete test suite:
 ```bash

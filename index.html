@@ -858,6 +858,30 @@
             font-size: 0.85rem;
             color: var(--text-dim);
         }
+
+        /* Printable stylesheet */
+        @media print {
+            header, .nav-tabs, .explorer-layout .controls-card, .map-actions, .grid-controls, .lightbox-modal, footer, .action-btn {
+                display: none !important;
+            }
+            body {
+                background: #ffffff !important;
+                color: #000000 !important;
+            }
+            .tab-panel {
+                display: block !important;
+            }
+            .table-card, .kpi-card, .grid-callout {
+                background: #ffffff !important;
+                border: 1px solid #cccccc !important;
+                box-shadow: none !important;
+                color: #000000 !important;
+            }
+            .custom-table th, .custom-table td {
+                color: #000000 !important;
+                border-color: #dddddd !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -892,6 +916,22 @@
 
     <!-- Main Content -->
     <main>
+        <!-- Problem Statement Card -->
+        <div class="table-card" style="padding: 1.5rem 2rem; margin-bottom: 1.5rem;">
+            <h2 style="font-family:'Outfit'; font-size:1.15rem; margin-bottom:0.5rem; color: #ffffff;">
+                The Problem
+            </h2>
+            <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">
+                Urban last-mile delivery in Indian cities means routing vehicles over real,
+                congested road networks — not idealized Euclidean space. This benchmark pits
+                a Quantum-behaved PSO solver against 6 established VRP baselines
+                (Nearest Neighbor, Clarke-Wright, Standard PSO, Genetic Algorithm, Ant Colony
+                MMAS) on real OpenStreetMap road geometry for Kharagpur, West Bengal, using
+                real delivery demand (Kaggle) and real India Post depot locations, evaluated
+                against an OR-Tools MIP reference optimum.
+            </p>
+        </div>
+
         <!-- KPI Strip -->
         <div class="kpi-grid">
             <div class="kpi-card emerald">
@@ -1083,12 +1123,25 @@
 
         <!-- TAB 3: BENCHMARK LEADERBOARD -->
         <div id="tab-leaderboard" class="tab-panel">
+            <div class="grid-callout" style="margin-bottom: 1.5rem;">
+                <div style="font-size: 1.5rem;">💡</div>
+                <div>
+                    <strong>How to read this leaderboard:</strong> QPSO-Optimized isn't the single best solver on every instance — it ties or
+                    matches the OR-Tools reference optimum most closely at N=20 and N=100, and
+                    is the only solver that stays feasible (respects the minimum-fleet lower bound)
+                    across all three scales. That's the actual claim being made.
+                </div>
+            </div>
+
             <div class="table-card">
                 <div class="table-card-header">
                     <div>
                         <h2>Audited Final Leaderboard</h2>
                         <p style="font-size: 0.825rem; color: var(--text-muted);">Uniform scoring through <code>UniformEvaluator</code> (accounting for true road distance, zero dropped penalties, and strict bin-packing lower bounds).</p>
                     </div>
+                    <button class="action-btn" onclick="exportLeaderboardCSV()" style="background: rgba(99, 102, 241, 0.2); border-color: var(--accent-primary);">
+                        <span>📥 Export Table to CSV</span>
+                    </button>
                 </div>
 
                 <table class="custom-table">
@@ -1379,7 +1432,7 @@
                         <span>Diurnal Traffic Congestion Profiles</span>
                         <span class="kpi-tag" style="color: #fbbf24;">Hourly Speed Degradation</span>
                     </h3>
-                    <img src="results/plots/test_sanity_profile.png" alt="Traffic Congestion Profile">
+                    <img src="results/plots/traffic_time_profiles.png" alt="Traffic Congestion Profile">
                 </div>
 
                 <div class="analytics-card">
@@ -1387,7 +1440,23 @@
                         <span>Data Calibration & Demand Distribution</span>
                         <span class="kpi-tag">Kaggle + Indian Post Snapping</span>
                     </h3>
-                    <img src="results/plots/test_sanity_calibration.png" alt="Data Calibration Overview">
+                    <img src="results/plots/data_calibration_overview.png" alt="Data Calibration Overview">
+                </div>
+
+                <div class="analytics-card">
+                    <h3>
+                        <span>Solution Quality Scaling</span>
+                        <span class="kpi-tag" style="color: #38bdf8;">Cost vs Problem Size</span>
+                    </h3>
+                    <img src="results/plots/scalability_cost.png" alt="Scalability Cost Curve">
+                </div>
+
+                <div class="analytics-card">
+                    <h3>
+                        <span>Runtime Scalability</span>
+                        <span class="kpi-tag" style="color: #a855f7;">Execution Time vs Scale</span>
+                    </h3>
+                    <img src="results/plots/scalability_runtime.png" alt="Scalability Runtime Curve">
                 </div>
             </div>
         </div>
@@ -1414,6 +1483,16 @@
                             <li><strong>Prins Split Algorithm:</strong> Replaced the greedy split with an optimal polynomial dynamic programming search over an auxiliary Directed Acyclic Graph (DAG), guaranteeing minimum possible travel distance for any customer permutation.</li>
                             <li><strong>FFD Bin-Packing Seeding:</strong> Proved that vehicle fleet counts must respect the bin-packing lower bound $K_{min} = \lceil \sum d_i / Q \rceil$. Injected an FFD seed particle to ensure the swarm explores the true minimum vehicle count.</li>
                             <li><strong>Inter-Route 2-opt*:</strong> Evaluated cross-route edge swaps $(u, u_{next})$ and $(v, v_{next})$, allowing routes to uncross and balance stop assignments, breaking the post-seeding distance plateau.</li>
+                        </ul>
+                    </div>
+
+                    <!-- Key Takeaways Strip -->
+                    <div style="margin-top: 1.5rem; background: rgba(99, 102, 241, 0.08); border: 1px solid rgba(99, 102, 241, 0.3); border-radius: var(--radius-md); padding: 1.25rem 1.5rem;">
+                        <h4 style="font-family: 'Outfit'; font-size: 1.1rem; color: #ffffff; margin-bottom: 0.75rem;">Key Takeaways for Evaluation</h4>
+                        <ul style="color: var(--text-muted); font-size: 0.875rem; line-height: 1.7; padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.5rem;">
+                            <li><strong>Near-Optimal Scaling:</strong> QPSO-Optimized matches or beats the OR-Tools reference optimum within <strong>1.19%</strong> at $N=100$ while being the only solver that strictly respects vehicle-fleet feasibility at every scale tested.</li>
+                            <li><strong>Algorithmic Origin of the Win:</strong> The <strong>22.8 km margin</strong> over Ant Colony MMAS at $N=100$ comes specifically from Inter-Route 2-opt* (see Ablation V6) — not from the QPSO mechanism alone.</li>
+                            <li><strong>Real-World Grounding:</strong> Benchmarked against real Indian road topology (Kharagpur OSM road graph) and real delivery demand data, not synthetic Euclidean test instances.</li>
                         </ul>
                     </div>
                 </div>
@@ -1469,6 +1548,15 @@
         let currentInstance = 'instance_n20';
         let currentAlgorithm = 'qpso_optimized';
 
+        const TAB_TITLES = {
+            'explorer': 'Live Route Explorer • QPSO-VRP',
+            'comparison': '2×4 Comparison Grids • QPSO-VRP',
+            'leaderboard': 'Audited Leaderboard • QPSO-VRP',
+            'ablation': 'Component Ablation (V1-V6) • QPSO-VRP',
+            'analytics': 'Analytics & Profiles • QPSO-VRP',
+            'research': 'Architecture & Formulations • QPSO-VRP'
+        };
+
         // Tab Switching
         function switchTab(tabId) {
             document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
@@ -1478,6 +1566,32 @@
             if (targetPanel) targetPanel.classList.add('active');
 
             event.currentTarget.classList.add('active');
+
+            if (TAB_TITLES[tabId]) {
+                document.title = TAB_TITLES[tabId];
+            }
+        }
+
+        function exportLeaderboardCSV() {
+            const table = document.querySelector('.custom-table');
+            let csv = [];
+            for (let row of table.rows) {
+                let cols = [];
+                for (let cell of row.cells) {
+                    let text = cell.innerText.replace(/"/g, '""').trim();
+                    cols.push('"' + text + '"');
+                }
+                csv.push(cols.join(','));
+            }
+            const blob = new Blob([csv.join('\n')], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'qpso_vrp_leaderboard.csv';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
         }
 
         // Live Map Explorer Updaters
