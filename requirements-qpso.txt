@@ -1,0 +1,22 @@
+# Additive dependency set for the optimized-QPSO study (src/qpso_lab, src/algorithms/qpso_optimized.py).
+# The base requirements.txt is owned by the rest of the team and is left untouched.
+#
+# Install:  py -3.14 -m venv .venv
+#           .venv/Scripts/python -m pip install -r requirements-qpso.txt
+#
+# osmnx / folium are deliberately NOT listed: they are needed only by the existing
+# src/visualization modules, not by any part of the QPSO study.
+
+numpy
+pandas
+matplotlib
+seaborn
+tqdm
+tabulate  # required by pandas.DataFrame.to_markdown(), used in src/qpso_lab/study.py's report
+
+# Required to import the existing src/algorithms/genetic_algorithm.py read-only
+# when the study runner benchmarks against it.
+deap
+
+# Reference solver only (near-optimal baseline so optimality gap % is meaningful).
+ortools
